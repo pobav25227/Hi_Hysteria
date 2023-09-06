@@ -1,10 +1,10 @@
-#### 如何设置我的延迟、上行/下行速度？
+#### How do I set my latency, up/down speed?
 
-hysteria 是基于UDP协议簇中的QUIC协议，魔改了暴力的拥塞控制算法而来的，同时又加了一些其他功能便于它作为“代理”发挥性能。
+Hysteria is based on the QUIC protocol in the UDP protocol cluster, which has been modified from the violent congestion control algorithm. At the same time, some other functions have been added to facilitate its performance as a "proxy".
 
-安装过程中会让你设置延迟和客户端速度,由于UDP是无连接的，在hihys默认情况下，服务端不会对客户端限速，即server/client"无穷大"的发送/接收速率，客户端唯一的刹车就是up_mbps/down_mbps。
+During the installation process, you will be asked to set the delay and client speed. Since UDP is connectionless, by default in hihys, the server will not limit the speed of the client, that is, the "infinite" sending/receiving rate of the server/client, the client The only brake on the end is up_mbps/down_mbps.
 
-所以为了方便hysteria性能的发挥，我建议你按真实的期望填写,脚本会自动*1.25做冗余的，过低性能无法跑满，过高按丢包率来说加速流量消耗，或者被认为是udp泛流攻击...
+Therefore, in order to facilitate the performance of hysteria, I suggest that you fill in according to your real expectations. The script will automatically *1.25 for redundancy. If the performance is too low, it will not be able to run to full capacity. If the performance is too high, it will speed up traffic consumption in terms of packet loss rate, or be considered udp flood attack...
 
-* 延迟即RTT延迟，ping得到的延迟就可以参考
-* up/down按本地带宽情况如实填写，同时要兼顾落地服务器性能，毕竟hysteria比起其他代理，开销更加大，一直cpu爆满，当心违反tos。
+* The delay is the RTT delay, the delay obtained by ping can be referred to
+* Up/down is filled in truthfully according to the local bandwidth situation, and at the same time, the performance of the landing server must be taken into account. After all, hysteria has more overhead than other proxies, and the CPU is always full, so be careful to violate tos.
