@@ -1,29 +1,29 @@
-# `0.3.7`之后停止更新 !!!
-### cmd客户端介绍
+# Stop updating after `0.3.7` !!!
+### cmd client introduction
 
-本项目只介绍如何在windows环境下使用，其他环境请参考[这里](https://github.com/HyNetwork/hysteria)。
+This project only introduces how to use it in the windows environment, please refer to [here](https://github.com/HyNetwork/hysteria) for other environments.
 
-因为暂时没有hysteria的图形界面，所以我用批处理写了一个简单的“客户端?!"，支持自动改代理和清除代理，实际使用没问题。
-可自行到[release](https://github.com/emptysuns/Hi_Hysteria/releases)中下载最新版本。
+Because there is no hysteria graphical interface for the time being, I wrote a simple "client?!" with batch processing, which supports automatic proxy change and clear proxy, and it is no problem in actual use.
+You can download the latest version from [release](https://github.com/emptysuns/Hi_Hysteria/releases) by yourself.
 
-欢迎其他开发者贡献新的UI或者插件。
+Other developers are welcome to contribute new UI or plugins.
 
-当出现**安装完毕**字样后，**会自动打印生成的配置信息**，同时**当前目录**下会生成一个config.json文件。
+When the words **Installation Complete** appear, **will automatically print the generated configuration information**, and at the same time, a config.json file will be generated under the **current directory**.
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/result.png)
 
-可以本地新建一个config.json（**一定要是这个名称！**）文件，复制粘贴到本地**conf**文件夹下，也可以直接下载生成的文件到本地**conf**文件夹下。
+You can create a new config.json (**must be this name!**) file locally, copy and paste it to the local **conf** folder, or you can directly download the generated file to the local **conf** folder .
 
-将config.json加入[**release**](https://github.com/emptysuns/Hi_Hysteria/releases)中提供的简单的windows cmd客户端的解压目录中.
+Add config.json to the decompression directory of the simple windows cmd client provided in [**release**](https://github.com/emptysuns/Hi_Hysteria/releases).
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/s1.png)
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/s2.png)
 
-如果本地配置丢失?使用cat打印config.json后复制:
+What if the local configuration is lost? Use cat to print config.json and then copy:
 
 ```
-# cat config.json 
+# cat config.json
 {
 "server": "1.2.3.4:57582",
 "protocol": "udp",
@@ -42,7 +42,7 @@
 "password": "pekopeko"
 },
 "alpn": "h3",
-"acl": "acl/routes.acl",
+"acl": "acl/routes. acl",
 "mmdb": "acl/Country.mmdb",
 "ca": "ca/wechat.com.ca.crt",
 "auth_str": "pekora",
@@ -58,84 +58,84 @@
 ctrl+c and +v.
 ```
 
-### 客户端使用
+### Client use
 
-提供两种运行方法：后台运行（无cmd窗口无感） 和 前台运行（必须得有cmd窗口，但是可查看当前日志）
+Provides two running methods: running in the background (no sense of cmd window) and running in the foreground (must have a cmd window, but you can view the current log)
 
-**启动之前**请把config.json放到conf文件夹！
+**Before starting** Please put config.json in the conf folder!
 
-******************************************************************************
+***************************************************** *****************************
 
-- 方法一：后台运行（推荐）
+- Method 1: Run in the background (recommended)
 
-运行:双击back_start.bat
+Run: double-click back_start.bat
 
-停止:双击back_stop.bat
+Stop: double-click back_stop.bat
 
-运行back_start.bat后，可以回车关闭此窗口，不需保留。
+After running back_start.bat, you can press Enter to close this window, no need to keep it.
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/tips.png)
 
-停止后台运行：
+Stop running in the background:
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/back_stop.png)
 
-批处理能力有限，请谅解.
-******************************************************************************
+Batch processing capacity is limited, please understand.
+***************************************************** *****************************
 
-- 方法二：前台运行
+- Method 2: Run in the foreground
 
-运行:双击run.bat
+Run: double-click run.bat
 
-停止:回车，或者键入其他非'n'的字符
+Stop: Enter, or type other non-'n' characters
 
-打开run.bat运行，运行时按回车键停止，防呆键入n继续运行
+Open run.bat to run, press the Enter key to stop when running, and type n to continue running
 
-**直接键入Enter关闭客户端！**
+**Type Enter directly to close the client! **
 
-**直接键入Enter关闭客户端！**
+**Type Enter directly to close the client! **
 
-**直接键入Enter关闭客户端！**
+**Type Enter directly to close the client! **
 
-**切记不要直接关闭cmd窗口！**
+**Remember not to close the cmd window directly! **
 
-**切记不要直接关闭cmd窗口！**
+**Remember not to close the cmd window directly! **
 
-**切记不要直接关闭cmd窗口！**
+**Remember not to close the cmd window directly! **
 
-批处理能力有限，请谅解.
+Batch processing capacity is limited, please understand.
 
-<center><font size=2>启动</font></center>
+<center><font size=2>start</font></center>
 
 ![image](https://cloud.iacg.cf/0:/normal/img/hihysteria/mark.png)
 
-<center><font size=2>防呆/关闭</font></center>
+<center><font size=2>font-proof/off</font></center>
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/stop.png)
 
-**Tips:前台运行模式下，不小心关掉窗口导致无法上网时，运行back_stop.bat可以清除代理和关闭hysteria。**
+**Tips: In the foreground mode, if you accidentally close the window and cannot access the Internet, run back_stop.bat to clear the proxy and close hysteria. **
 
-******************************************************************************
+***************************************************** *****************************
 
-### 客户端配置未生效？
+### The client configuration does not take effect?
 
-如上图启动成功，但代理并未启用，请手动打开设置->网络->代理,查看配置是否生效
+As shown in the figure above, the startup is successful, but the proxy is not enabled. Please manually open Settings->Network->Proxy to check whether the configuration takes effect
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/proxy.png)
 
-### 配置开机自启
+### Configure autostart
 
-~~不会有人不知道吧:)~~
+~~No one will not know :)~~
 
-对back_start.bat(**后台模式**) 或者 run.bat(**前台模式**)文件创建一个**快捷方式**
+Create a **shortcut** to the back_start.bat(**background mode**) or run.bat(**foreground mode**) file
 
-win+r 键入
+win+r type
 
 ```
 shell:startup
 ```
 
-打开自启目录将快捷方式**复制**进去，下次开机就会自启动。
+Open the self-starting directory and copy the shortcut **copy** into it, and it will start automatically next time you boot.
 
 ![image](https://raw.githubusercontent.com/emptysuns/Hi_Hysteria/main/imgs/startup.png)
-<center><font size=2>这里用后台做演示，前台同理</font></center>
+<center><font size=2>The background is used for demonstration here, and the front desk is the same</font></center>
