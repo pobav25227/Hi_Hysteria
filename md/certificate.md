@@ -1,12 +1,12 @@
-#### hysteria自签证书
+#### hysteria self-signed certificate
 
-**不再推荐自签证书,GFW最近会对自签证书数据包进行随机阻断(此提示不消失说明阻断依旧)**
+**Self-signed certificates are no longer recommended, GFW will randomly block self-signed certificate packets recently (this prompt does not disappear, indicating that the blocking is still there)**
 
-自签证书时的**允许不安全连接**时会有MIMT(Man-in-the-middle attack, 中间人攻击)风险。现在脚本默认情况下允许不安全连接(~~我反正觉得被攻击的概率极小，自己判断吧~~
+There is a risk of MIMT (Man-in-the-middle attack, man-in-the-middle attack) when **allowing insecure connections** when self-signed certificates. Now the script allows unsafe connections by default (~~I think the probability of being attacked is extremely small anyway, judge for yourself~~
 
-对于v2rayN客户端来说，在使用自签证书时，而且希望和正常证书一样安全时，请参考:
+For the v2rayN client, when using a self-signed certificate and wanting to be as secure as a normal certificate, please refer to:
 
-1. 手动复制server 自签的CA `/etc/hihy/result/wechat.com.ca.crt`到v2rayN-hysteria的 `ca/`文件夹下(没有这个文件夹就新建一个)
-2. 修改config.json `"insecure": true`为 `false`
-3. 在config.json中增加 `ca`选项 `"ca": "ca/wechat.com.ca.crt",`（根据自签域名修改）
-4. 重新运行
+1. Manually copy the server self-signed CA `/etc/hihy/result/wechat.com.ca.crt` to v2rayN-hysteria's `ca/` folder (if there is no such folder, create a new one)
+2. Modify config.json `"insecure": true` to `false`
+3. Add `ca` option `"ca": "ca/wechat.com.ca.crt",` in config.json (modified according to self-signed domain name)
+4. Rerun
