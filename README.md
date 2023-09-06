@@ -1,32 +1,32 @@
-# Hi Hysteria
+#Hi Hysteria
 
 ##### (2023/09/02) 0.4.9
 
 ```
-1. 修复发布v2后hysteria v1 版本号识别bug
+1. Fix hysteria v1 version number recognition bug after v2 release
 
-Q: 什么时候兼容hysteria v2?
-A: 因为hysteria v2刚发布正式版没有几个小时，只有sing-box beta版本支持它，且v1和v2互不兼容
-客户端没有很好的适配，0.4.9先不准备，等下个版本0.5.0会同时兼容v1和v2两个版本（尽快更新）
-v1和v2改动挺大的，如果想要尝鲜可以先手动配置
+Q: When will hysteria v2 be compatible?
+A: Because hysteria v2 has just released the official version for a few hours, only the sing-box beta version supports it, and v1 and v2 are not compatible with each other
+The client is not well adapted, 0.4.9 is not ready yet, the next version 0.5.0 will be compatible with both v1 and v2 versions (update as soon as possible)
+The changes in v1 and v2 are quite big, if you want to try it out, you can manually configure it first
 ```
 [Hysteria V2 protocol support](https://github.com/emptysuns/Hi_Hysteria/issues/263)
 
-[历史改进](md/log.md)
+[Historical improvements](md/log.md)
 
-## 一·简介
+## 1. Introduction
 
-> Hysteria 是一个功能丰富的，专为恶劣网络环境进行优化的网络工具（双边加速），比如卫星网络、拥挤的公共 Wi-Fi、在**中国连接国外服务器**等。 基于修改版的 QUIC 协议。
+> Hysteria is a feature-rich network tool (two-way acceleration) optimized for harsh network environments, such as satellite networks, crowded public Wi-Fi, connecting to foreign servers in **China**, etc. Based on a modified version of the QUIC protocol.
 
-Hysteria这是一款由go编写的非常优秀的“轻量”代理程序，它很好的解决了在搭建富强魔法服务器时最大的痛点——**线路拉跨**。
+Hysteria is a very good "lightweight" proxy program written by go, which solves the biggest pain point when building a powerful magic server - **line crossing**.
 
-在魔法咏唱时最难的不是搭建维护，而是在晚高峰时期的交付质量。~~当三大运营商晚高变成了：奠信、连不通、移不动时，你我都有感触。~~ 虽然是走的udp但是提供obfs，暂时不会被运营商针对性的QoS(不开obfs也不会被QoS)。
+The most difficult thing in the magic chant is not the construction and maintenance, but the delivery quality during the evening peak period. ~~When the three major operators Wangao became: Dianxin, Impossible, Immovable, you and I both felt. ~~ Although it uses udp but provides obfs, it will not be subject to targeted QoS by operators for the time being (if you do not enable obfs, you will not be subject to QoS).
 
-1、原项目提供的bench:
+1. Bench provided by the original project:
 
 ![image](https://raw.githubusercontent.com/HyNetwork/hysteria/master/docs/bench/bench.png)
 
-2、50mbps北方电信,北京出口 直连落地vir San Jose机房163线路，22-23点测试YT 1080p60直播流:
+2. 50mbps Northern Telecom, Beijing exit, directly connected to line 163 in the vir San Jose computer room, and tested YT 1080p60 live stream at 22-23 o'clock:
 
 ![image](imgs/speed.png)
 
@@ -34,169 +34,169 @@ Hysteria这是一款由go编写的非常优秀的“轻量”代理程序，它�
 190 dropped of 131329
 ```
 
-3、无对钟国大陆线路优化，洛杉矶shockhosting机房，1c128m ovznat 4k@p60：
+3. Optimization of Zhongguo mainland line, Los Angeles shockhosting computer room, 1c128m ovznat 4k@p60:
 ![image](imgs/yt.jpg)
 
 ```
 139783 Kbps
 ```
 
-该项目仅作学习用途，请查看的访客在5s之内立即删除并停止使用。
+This project is only for learning purposes, please delete and stop using it immediately within 5 seconds.
 
-由它所引起的任何问题，作者并不承担风险和任何法律责任。
+The author does not assume the risk and any legal responsibility for any problems caused by it.
 
-因为脚本现处于0.x的测试版本，可能会有一些bug，如果遇到请发issue，欢迎star，您的⭐是我维护的动力。
+Because the script is currently in the test version of 0.x, there may be some bugs, if you encounter them, please send an issue, welcome to star, your ⭐ is the motivation for my maintenance.
 
-适配ubuntu/debian, centos/rhel操作系统,misple/arm/x86/s390x架构。
+Adapt to ubuntu/debian, centos/rhel operating system, misple/arm/x86/s390x architecture.
 
-## 二·使用
+## Two. Use
 
-### 第一次使用?
+### First time use?
 
-#### 1. [防火墙问题](md/firewall.md)
+#### 1. [Firewall issues](md/firewall.md)
 
-#### 2. [自签证书](md/certificate.md)
+#### 2. [Self-signed certificate](md/certificate.md)
 
-#### 3. [限制UDP的服务商排雷列表【2023/01/26更新】](md/blacklist.md)
+#### 3. [Restricted UDP service provider demining list [2023/01/26 update]](md/blacklist.md)
 
-#### 4. [hysteria各个协议介绍](md/protocol.md)
+#### 4. [Introduction to protocols in hysteria](md/protocol.md)
 
-#### 5. [如何设置我的延迟、上行/下行速度？](md/speed.md)
+#### 5. [How to set my delay, uplink/downlink speed? ](md/speed.md)
 
-#### 6. [支持的客户端](md/client.md)
+#### 6. [Supported clients](md/client.md)
 
-#### 7. [常见问题](md/issues.md)
+#### 7. [FAQ](md/issues.md)
 
-#### 8. [[端口跳跃/多端口](Port Hopping)介绍](md/portHopping.md)
+#### 8. [[Port Hopping/Multiple Ports](Port Hopping) Introduction](md/portHopping.md)
 
-### 拉取安装
+### pull install
 
 ```
 su - root #switch to root user.
 bash <(curl -fsSL https://git.io/hysteria.sh)
 ```
 
-### 配置过程
+### Configuration process
 
-首次安装后: `hihy`命令调出菜单,如更新了hihy脚本，请执行选项 `9`或者 `12`,获得最新的配置
+After the first installation: `hihy` command brings up the menu, if the hihy script is updated, please execute option `9` or `12` to get the latest configuration
 
 ```
- -------------------------------------------
-|**********      Hi Hysteria       **********|
-|**********    Author: emptysuns   **********|
-|**********     Version: 0.4.6     **********|
- -------------------------------------------
-Tips:hihy 命令再次运行本脚本.
-............................................. 
-############################### 
+  -----------------------------------------------
+|********** Hi Hysteria ***********|
+|********** Author: emptysuns ***********|
+|********** Version: 0.4.6 ***********|
+  -----------------------------------------------
+Tips: run the script again with the hihy command.
+...................................................
+#################################
 
-..................... 
-1)  安装 hysteria 
-2)  卸载 
-..................... 
-3)  启动 
-4)  暂停 
-5)  重新启动 
-6)  运行状态 
-..................... 
-7)  更新Core 
-8)  查看当前配置 
-9)  重新配置 
-10) 切换ipv4/ipv6优先级 
-11) 更新hihy 
-12) 完全重置所有配置 
-13) 修改当前协议类型
-14) 查看实时日志
+...................................
+1) Install hysteria
+2) Uninstall
+...................................
+3) start
+4) pause
+5) reboot
+6) Running status
+...................................
+7) Update Core
+8) View the current configuration
+9) Reconfigure
+10) Switch ipv4/ipv6 priority
+11) Update hihy
+12) Completely reset all configurations
+13) Modify the current protocol type
+14) View real-time logs
 
-############################### 
+#################################
 
 
-0)退出 
-............................................. 
-请选择:
+0) exit
+...................................................
+please choose:
 ```
 
-**脚本每次更新都可能会发生改变，请一定要展开并仔细参考演示过程，避免发生不必要的错误！**
+**The script may change every time it is updated, please be sure to expand and refer to the demo process carefully to avoid unnecessary mistakes! **
 
 <details>
-  <summary>演示较长，点我查看</summary>
-<pre><blockcode> 
-开始配置:
-请选择证书申请方式:
+   <summary>The demo is long, click me to view</summary>
+<pre><blockcode>
+Start configuration:
+Please choose the certificate application method:
 
-1、使用ACME申请(推荐,需打开tcp 80/443)
-2、使用本地证书文件
-3、自签证书
+1. Use ACME to apply (recommended, you need to open tcp 80/443)
+2. Use a local certificate file
+3. Self-signed certificate
 
-输入序号:
+Enter serial number:
 3
-请输入自签证书的域名(默认:wechat.com):
-注意:自签证书近一段时间来遭到大量随机阻断,请谨慎使用(这条提示不消失说明阻断还在继续)
-如果一定要使用自签证书,请在下方配置选择使用obfs混淆验证,保证安全性
+Please enter the domain name of the self-signed certificate (default: wechat.com):
+Note: Self-signed certificates have been randomly blocked in recent times, please use them with caution (this prompt does not disappear, indicating that the blocking is still going on)
+If you must use a self-signed certificate, please choose to use obfs obfuscated verification in the configuration below to ensure security
 fuck.qq.com
-判断自签证书,客户端连接所使用的地址是否正确?公网ip:1.2.3.4
-请选择:
+Judging the self-signed certificate, whether the address used by the client connection is correct? Public network ip: 1.2.3.4
+please choose:
 
-1、正确(默认)
-2、不正确,手动输入ip
+1. Correct (default)
+2. Incorrect, manually input ip
 
-输入序号:
+Enter serial number:
 1
 
-->您已选择自签fuck.qq.com证书加密.公网ip:1.2.3.4
+->You have chosen self-signed fuck.qq.com certificate encryption. Public network ip: 1.2.3.4
 
-选择协议类型:
+Select the protocol type:
 
-1、udp(QUIC,可启动端口跳跃)
-2、faketcp
-3、wechat-video(默认)
+1. udp (QUIC, can start port jumping)
+2. faketcp
+3. wechat-video (default)
 
-输入序号:
+Enter serial number:
 3
 
-->传输协议:wechat-video
+->Transmission protocol: wechat-video
 
-请输入你想要开启的端口,此端口是server端口,建议10000-65535.(默认随机)
+Please enter the port you want to open. This port is the server port. It is recommended to be 10000-65535. (Random by default)
 
-->使用随机端口:udp/14274
+-> Use random port: udp/14274
 
-请输入您到此服务器的平均延迟,关系到转发速度(默认200,单位:ms):
+Please enter your average delay to this server, which is related to the forwarding speed (default 200, unit: ms):
 180
 
-->延迟:180 ms
+-> Latency: 180 ms
 
-期望速度,这是客户端的峰值速度,服务端默认不受限。Tips:脚本会自动*1.10做冗余，您期望过低或者过高会影响转发效率,请如实填写!
-请输入客户端期望的下行速度:(默认50,单位:mbps):
+Expected speed, which is the peak speed of the client, and the server is not limited by default. Tips: The script will automatically *1.10 for redundancy. If your expectation is too low or too high, it will affect the forwarding efficiency. Please fill in truthfully!
+Please enter the downlink speed expected by the client: (default 50, unit: mbps):
 180
 
-->客户端下行速度：180 mbps
+-> Client downlink speed: 180 mbps
 
-请输入客户端期望的上行速度(默认10,单位:mbps):
+Please enter the client's expected uplink speed (default 10, unit: mbps):
 30
 
-->客户端上行速度：30 mbps
+->Client uplink speed: 30 mbps
 
-请输入认证口令(默认随机生成,建议20位以上强密码):
+Please enter the authentication password (randomly generated by default, a strong password of more than 20 characters is recommended):
 
-->认证口令:Wvb9NlmWt0BxkJXoLnYKvM0NoOUz6sIgdaWHDr1gMzQGtE8lIs
+-> Authentication password: Wvb9NlmWt0BxkJXoLnYKvM0NoOUz6sIgdaWHDr1gMzQGtE8lIs
 
-Tips: 如果使用obfs混淆加密,抗封锁能力更强,能被识别为未知udp流量,但是会增加cpu负载导致峰值速度下降,如果您追求性能且未被针对封锁建议不使用
-选择验证方式:
+Tips: If obfs obfuscated encryption is used, the anti-blocking ability is stronger, and it can be recognized as unknown udp traffic, but it will increase the CPU load and cause the peak speed to drop. If you are pursuing performance and have not been targeted for blocking, it is recommended not to use it
+Choose a verification method:
 
-1、auth_str(默认)
-2、obfs
+1. auth_str (default)
+2. obfs
 
-输入序号:
+Enter serial number:
 2
 
-->您选择的验证方式为:obfs
+->The verification method you choose is: obfs
 
-请输入客户端名称备注(默认使用域名/IP区分,例如输入test,则名称为Hys-test):
+Please enter the client name for remarks (by default, the domain name/IP is used to distinguish, for example, if you enter test, the name is Hys-test):
 demo
 
-配置录入完成!
+Configuration entry is complete!
 
-执行配置...
+Execute configure...
 SIGN...
 
 Signature ok
@@ -212,13 +212,13 @@ Test config...
 IPTABLES OPEN: udp/14274
 Test success!
 Generating config...
-安装成功,请查看下方配置详细信息
-docker.sh: line 877: 27670 Killed                  /etc/hihy/bin/appS -c /etc/hihy/conf/hihyServer.json server > /tmp/hihy_debug.info 2>&1
+The installation is successful, please check the configuration details below
+docker.sh: line 877: 27670 Killed /etc/hihy/bin/appS -c /etc/hihy/conf/hihyServer.json server > /tmp/hihy_debug.info 2>&1
 
-1* [v2rayN/nekoray] 使用hysteria core直接运行:
-客户端配置文件输出至: /root/Hys-demo(v2rayN).json ( 直接下载生成的配置文件[推荐] / 自行复制粘贴下方配置到本地 )
-Tips:客户端默认只开启http(8888)、socks5(8889)代理!其他方式请参照hysteria文档自行修改客户端config.json
-↓***********************************↓↓↓copy↓↓↓*******************************↓
+1* [v2rayN/nekoray] Use hysteria core to run directly:
+The client configuration file is output to: /root/Hys-demo(v2rayN).json (directly download the generated configuration file [recommended] / copy and paste the configuration below to local)
+Tips: The client only enables http(8888) and socks5(8889) proxies by default! For other methods, please refer to the hysteria documentation to modify the client config.json by yourself
+↓***********************************↓↓↓copy↓↓↓******** *************************↓
 {
 "server": "1.2.3.4:14274",
 "protocol": "wechat-video",
@@ -237,7 +237,7 @@ Tips:客户端默认只开启http(8888)、socks5(8889)代理!其他方式请参�
 "obfs": "Wvb9NlmWt0BxkJXoLnYKvM0NoOUz6sIgdaWHDr1gMzQGtE8lIs",
 "auth_str": "",
 "alpn": "h3",
-"acl": "acl/routes.acl",
+"acl": "acl/routes. acl",
 "mmdb": "acl/Country.mmdb",
 "server_name": "fuck.qq.com",
 "insecure": true,
@@ -253,68 +253,4 @@ Tips:客户端默认只开启http(8888)、socks5(8889)代理!其他方式请参�
 "fast_open": true,
 "hop_interval": 120
 }
-↑***********************************↑↑↑copy↑↑↑*******************************↑
-
-2* [Shadowrocket/Sagernet/Passwall] 一键链接:
-hysteria://1.2.3.4:14274?protocol=wechat-video&auth=&obfsParam=Wvb9NlmWt0BxkJXoLnYKvM0NoOUz6sIgdaWHDr1gMzQGtE8lIs&peer=fuck.qq.com&insecure=1&upmbps=33&downmbps=198&alpn=h3#Hys-demo
-
-3* [Clash.Meta] 配置文件已在/root/Hys-demo(clashMeta).yaml输出,请下载至客户端使用(beta)
-
-`</blockcode></pre>`
-
-</details>
-
-## 三·选读
-
-#### 1. [借用其他支持Socks5的GUI，来获得一个图形界面](https://github.com/emptysuns/Hi_Hysteria/blob/main/md/gui.md)
-
-## 四·Todo
-
-**如果您有好的功能建议，请不要忘记开个issue提出来欧～～～欢迎PR来完成Todo或者给我纠正我的渣代码**
-
-**我的爱好是写bug （￣▽￣）~**
-
-* [X] 检测端口是否被占用
-* [ ] 利用xray s5 inbound来支持按域名分流(warp)
-* [X] 生成分享链接
-* [X] hihy替换掉hysteria
-* [ ] 规范化脚本代码
-* [ ] 提供docker和systemd(已完成)两种运行方式
-* [ ] 利用base64加密替换原来的auth_str
-* [X] 兼容v2rayN,放弃cmd的更新
-* [X] 支持clash.meta核心
-* [X] 优化clash配置选项
-* [ ] 支持sing-box作为core运行方式
-* [X] 提供查看实时log选项
-* [ ] 生成clash配置时，提供一个远程链接来代替本地导入（咕～）
-* [X] 完善对portHopping功能的支持
-
-## 五·结语
-
-魔改UDP的QUIC协议，加了tls和混淆的话，个人跑了一段时间大流量，未被运营商QoS，落地ip并没有被墙，也不知道什么时候被针对，大家且用且珍惜吧。
-
-## 六·鸣谢
-
-[@apernet/hysteria](https://github.com/HyNetwork/hysteria)
-
-[@Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)
-
-[@mack-a/v2ray-agent](https://github.com/mack-a/v2ray-agent)
-
-[@2dust/v2rayN](https://github.com/2dust/v2rayN)
-
-[@Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)
-
-[@zzzgydi/clash-verge](https://github.com/zzzgydi/clash-verge)
-
-[@MetaCubeX/Clash.Meta](https://github.com/MetaCubeX/Clash.Meta)
-
-## 七·捐赠
-
-如果您有能力，请捐赠**hysteria开发项目组**去支持它们无私的工作，谢谢:
-
-此捐助对象不是hihy,只是单纯帮它们宣传...
-
-[https://hysteria.network/docs/donations/](https://hysteria.network/docs/donations/)
-
-[![Crypto donation button by NOWPayments](https://camo.githubusercontent.com/70a3b7fb344c4dc9151639ec5db5e713b2bb177aa6cac6e63538f33a74585e48/68747470733a2f2f6e6f777061796d656e74732e696f2f696d616765732f656d626564732f646f6e6174696f6e2d627574746f6e2d626c61636b2e737667)](https://nowpayments.io/donation?api_key=EJH83FM-FDC40ZW-QGDZRR4-A7SC67S)
+↑********************************** ↑↑↑copy↑↑↑******** *******************
