@@ -1,25 +1,25 @@
-### 各协议介绍
+### Introduction to each protocol
 
-#### 1、udp
+#### 1. udp
 
-可被识别为QUIC流量，直接使用最佳。
+It can be identified as QUIC traffic, and it is best to use it directly.
 
-脚本0.2.5版本后不再默认加入`obfs`选项了，由于混淆的开销太大，会让cpu性能成为速度的瓶颈。
+After version 0.2.5 of the script, the `obfs` option is no longer added by default. Because the obfuscation overhead is too large, the CPU performance will become the speed bottleneck.
 
-而且运营商不会单单限速QUIC的传输，长时间测试过程中未被限速过，所以取消掉`obfs`支持。
+Moreover, the operator will not only limit the speed of QUIC transmission, and the speed has not been limited during the long-term test process, so the `obfs` support has been canceled.
 
-#### 2、faketcp
+#### 2. faketcp
 
-hysteria v0.9.1 开始支持faketcp，将hysteria的UDP传输过程伪装成TCP，可以躲过运营商和“比较专业”的IDC服务商的QoS设备的对UDP的限速、阻断。
+hysteria v0.9.1 began to support faketcp, which disguises hysteria's UDP transmission process as TCP, which can avoid the speed limit and blocking of UDP by the QoS equipment of operators and "professional" IDC service providers.
 
-目前faketcp模式客户端只支持在linux类系统root用户内使用包括安卓，**windows无法使用**（但是可配合udp2raw伪装tcp代替）。
+At present, the faketcp mode client only supports the use of root users in linux-like systems including Android, and **windows cannot be used** (but it can be replaced by fake tcp with udp2raw).
 
-所以我的建议是：
+So my suggestion is:
 
-**追求代理性能时不要开启它**。当下行速度一直被限制在例如128kB/s这种非常非常低的速率情况时，你确认被限制UDP后再重新安装后开启，它并不能"增速"，反而会增加cpu的开销，给hysteria“减速”。
+**Do not enable it when pursuing proxy performance**. When the download speed has been limited to a very, very low rate such as 128kB/s, you confirm that UDP is limited and then reinstall and enable it. It will not "speed up", but will increase the CPU overhead, causing hysteria "slow down".
 
-**追求稳定性且能准备root权限使用环境时**。能开faketcp就开它。
+**Pursue stability and can prepare root permission to use the environment**. If you can open faketcp, open it.
 
-#### 3、wechat-video
+#### 3. wechat-video
 
-伪装成wechat的语音视频通话，可能会绕过少部分国内运营商对udp针对性限速？有待证实。
+Voice and video calls disguised as wechat may bypass the targeted speed limit of udp by a small number of domestic operators? To be confirmed.
