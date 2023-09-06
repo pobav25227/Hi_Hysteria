@@ -47,7 +47,7 @@ function delPortHoppingNat(){
 }
 
 function delHihyFirewallPort() {
-	# 如果防火墙启动状态则删除之前的规则
+	# If the firewall is enabled, delete the previous rule
 	port=`cat /etc/hihy/conf/hihyServer.json | grep "listen" | awk '{print $2}' | tr -cd "[0-9]"`
 	if [[ `ufw status 2>/dev/null | grep "Status: " | awk '{print $2}'` = "active" ]]	; then
 		if ufw status | grep -q ${port}; then
