@@ -2,16 +2,16 @@
 
 ```
 hysteria update to v1.3.5:
-v1.3.5修复了一个socks5对域名解析的bug,支持了windows cmd下的彩色字符,并没有重要功能更新
+v1.3.5 fixes a socks5 bug in domain name resolution, supports colored characters under windows cmd, and has no important function updates
 
-Q:  hy 1.x版本不会再有重大的功能更新？
-A：Hysteria 1.x 将继续推出 bug 和安全修复，现在开发重心在hy2，目前hy1的功能已经很完善了，速度上hy1和hy2没区别，区别在于hy2更看重流量和http/3流量相同，能够实现类似xray的回落到web的功能，但并不能保证不会被封锁udp流量，所以目前正在测试阶段，实际效果还有待观察
+Q: Hy 1.x version will not have any major function updates?
+A: Hysteria 1.x will continue to release bugs and security fixes. Now the focus of development is on hy2. At present, the functions of hy1 are very complete. There is no difference between hy1 and hy2 in terms of speed. The difference is that hy2 pays more attention to traffic and http/3 traffic. It can realize the function of falling back to the web similar to xray, but there is no guarantee that the udp traffic will not be blocked, so it is currently in the testing stage, and the actual effect remains to be seen
 
-Q: 关于hihy什么时候支持hy2?
-A:  hy2目前处于测试状态，很多hy1有的功能hy2暂不支持，而且客户端只能用命令行使用，等hy2发布第一个完整的公开版，再考虑适配
+Q: When will hihy support hy2?
+A: hy2 is currently in the testing state. Many functions of hy1 are not supported by hy2, and the client can only be used with the command line. Wait for hy2 to release the first complete public version before considering adaptation
 
-1. 修复由于服务器ip太黑无法获得正确hysteria版本号问题
-2. matsuri也不会再推出重大功能更新，建议安卓用户选择它的“升级版”nekobox
+1. Fix the problem that the correct hysteria version number cannot be obtained because the server ip is too dark
+2. matsuri will not release major function updates, and Android users are advised to choose its "upgraded version" nekobox
 https://github.com/MatsuriDayo/NekoBoxForAndroid
 ```
 
@@ -19,180 +19,180 @@ https://github.com/MatsuriDayo/NekoBoxForAndroid
 ##### (2023/03/15) 0.4.7
 
 ```
-hysteria update to 1.3.4 : 修复了一些bug，更新依赖，客户端提供lazy_start选项，当传入数据时才连接服务端，客户端功能
+hysteria update to 1.3.4 : Fixed some bugs, updated dependencies, the client provides the lazy_start option, only connects to the server when incoming data, client functions
 
-1. 客户端增加配置lazy_start，目前仅支持v2rayN这种使用core直接运行的客户端，其他等待后续它的版本打包后再加
-2. 增大net.core.rmem_max
-3. 加长5s等待配置测试时间，由于ACME申请证书可能有延迟，防止配置检测失败
-4. 完善了一下client介绍文档
+1. The client adds lazy_start configuration. Currently, it only supports v2rayN, a client that uses the core to run directly. Others will be added after the subsequent version is packaged.
+2. Increase net.core.rmem_max
+3. Increase the waiting time for configuration testing by 5 seconds, because there may be a delay in ACME certificate application to prevent configuration detection failures
+4. Improve the client introduction document
 
-Tips: 观察到开启lazy_start后会频繁触发运营商UDP QoS规则，为了安全所以0.4.7.a之后暂时默认关闭
-如果需要测试请手动添加客户端选项`"lazy_start": true`,后续会跟进
+Tips: It is observed that the operator’s UDP QoS rules are frequently triggered after lazy_start is turned on. For safety, it is temporarily disabled by default after 0.4.7.a
+If you need to test, please manually add the client option `"lazy_start": true`, follow up later
 ```
 
 ##### (2023/02/17) 0.4.6
 
 ```
-hysteria update to 1.3.3 : 修复了一些bug，更新依赖提升些许性能
+hysteria update to 1.3.3 : fixed some bugs, updated dependencies to improve performance
 
-1. 修复在不使用PortHopping时,生成链接出现-字符，导致导入异常的问题
-2. 取消server配置resovler选项，默认使用系统dns地址
-3. V2rayN选择使用6.0以上版本
-4. 兼容clash.meta 端口跳跃和TCP快速打开
+1. Fix the problem that when PortHopping is not used, a - character appears in the generated link, resulting in an abnormal import
+2. Cancel the server configuration resovler option, and use the system dns address by default
+3. V2rayN chooses to use version 6.0 or above
+4. Compatible with clash.meta port jumping and TCP fast opening
 ```
 
 ##### (2022/12/11) 0.4.5.b
 
 ```
-1. 支持配置obfs,如果使用自签证书请尽量使用obfs混淆
-2. 修复随机密码乱码问题
-3. 增加命令直达功能，映射数字序号，比如hihy 5将重启服务端, hihy 14将打印日志
-4. 修改服务端DoH改为DNS 53
-5. 常见问题里增加一个TG交流群组链接，意在交流、解决使用过程中出现的各种问题
+1. Support obfs configuration, if you use a self-signed certificate, please try to use obfs to confuse
+2. Fix random password garbled problem
+3. Add the command direct function, map the digital serial number, for example, hihy 5 will restart the server, hihy 14 will print the log
+4. Modify the server DoH to DNS 53
+5. Add a TG communication group link in the FAQ, which is intended to communicate and solve various problems that arise during use
 https://hihysteria.t.me/
-6. 兼容Masturi、shadowrocket 一键链接配置端口跳跃参数
+6. Compatible with Masturi, shadowrocket, one-click link configuration port jumping parameters
 ```
 
 ##### (2022/12/04) 0.4.4.m
 
 ```
-hysteria 1.3.1发布,支持了fast_open加快响应速度和提升了些许性能(目前fast_open仅适用hysteria内核直接运行方式(V2rayN),其他客户端未直接支持)
-1. 支持对配置进行备注
-2. 增加对自签证书的提示，最近GFW对自签证书阻断情况严重，不再推荐使用
-3. 增加了一些提示信息方便配置过程
-4. 增加随机密码功能
-5. 完善对PortHopping的支持，修复重启系统后iptables规则消失的bug
-6. 修复ip被github拉黑无法获得hysteria core时下载为空的bug
-7. 增加重启hysteria后的检测，修复重启失败时提示成功的bug
-8. 修复netfilter-persistent规则无法删除的bug
-9. 一些其它bug修复
-10.支持fast_open
-11.在release上增加其他客户端下载方便直接取得
-12.修复lsof不区分端口类型和监听状态的bug
-13.完善对端口合法性的判断，引导用户尽可能输入正确的端口
-14.修改测试配置的方式，加快配置打印时间
-15.修复实时日志打印的方式，使用重定向到cat防止更新不及时
+Hysteria 1.3.1 is released, which supports fast_open to speed up the response and improve a little performance (currently fast_open is only applicable to the direct operation mode of the hysteria kernel (V2rayN), and other clients do not directly support it)
+1. Support comments on configuration
+2. Added reminders for self-signed certificates. Recently, GFW has seriously blocked self-signed certificates and is no longer recommended.
+3. Added some prompt information to facilitate the configuration process
+4. Add random password function
+5. Improve the support for PortHopping, fix the bug that iptables rules disappear after restarting the system
+6. Fix the bug that the download is empty when the ip is blocked by github and the hysteria core cannot be obtained
+7. Increase the detection after restarting hysteria, and fix the bug that prompts success when restarting fails
+8. Fix the bug that netfilter-persistent rules cannot be deleted
+9. Some other bug fixes
+10. Support fast_open
+11. Add other client downloads on the release to facilitate direct access
+12. Fix the bug that lsof does not distinguish between port type and listening status
+13. Improve the judgment of port legitimacy and guide users to input the correct port as much as possible
+14. Modify the test configuration method to speed up the configuration printing time
+15. Fix the way of real-time log printing, use redirection to cat to prevent untimely update
 
-Q: 为什么0.4.4更新这么频繁，内容这么多?
-A: 上个版本为了兼容portHopping动了很多祖传代码，导致一堆bug，所以修复的比较多
+Q: Why is 0.4.4 updated so frequently and with so much content?
+A: In the last version, a lot of ancestral codes were moved to be compatible with portHopping, resulting in a bunch of bugs, so there are more fixes
 ```
 
 ##### (2022/11/08) 0.4.3.c
 
-**hysteria原仓库由[@HyNetwork](https://github.com/HyNetwork/hysteria)更名为[@apernet](https://github.com/apernet/hysteria)，请低于0.4.3.c版本的用户更新后再使用，否则无法获取core信息导致安装失败!!!**
+**The original warehouse of hysteria was renamed from [@HyNetwork](https://github.com/HyNetwork/hysteria) to [@apernet](https://github.com/apernet/hysteria), please be lower than 0.4.3. Users of the c version can use it after updating, otherwise the core information cannot be obtained and the installation will fail!!!**
 
 ```
-1. hysteria 1.3.0发布，支持了多端口监听功能(仅UDP协议支持)，能够无感切换防止单端口QoS/断流等问题
-详细信息请参考: https://github.com/emptysuns/Hi_Hysteria/blob/main/md/portHopping.md
-2. 修复上个版本切换协议时的遗留bug
-3. 修改一些文字颜色，使之打印出来结果更加清晰
-4. clash.meta 1.13.2 后alpn配置变成了数组，如果您版本低于1.13.2您可能需要更新您的客户端以支持最新的配置
-详细内容: https://docs.metacubex.one/function/proxy/hysteria
-5. 修复启动端口跳跃时对协议类型误判的bug
+1. Hysteria 1.3.0 is released, which supports multi-port monitoring function (only supported by UDP protocol), and can switch without sense to prevent problems such as single-port QoS/disconnection
+For details, please refer to: https://github.com/emptysuns/Hi_Hysteria/blob/main/md/portHopping.md
+2. Fix the remaining bugs when switching protocols in the previous version
+3. Modify some text colors to make the printed results clearer
+4. After clash.meta 1.13.2, the alpn configuration becomes an array. If your version is lower than 1.13.2, you may need to update your client to support the latest configuration
+Details: https://docs.metacubex.one/function/proxy/hysteria
+5. Fix the bug that the protocol type is misjudged when port hopping is started
 ```
 
 #### (2022/10/28) 0.4.2:
 
 ```
-说明: hysteria 1.2.2 新增心跳检测配置，如果v2rayN想要使用最新的hihy配置，请更新hysteria到1.2.2以上否则不兼容最新的配置
+Note: hysteria 1.2.2 adds heartbeat detection configuration, if v2rayN wants to use the latest hihy configuration, please update hysteria to 1.2.2 or above, otherwise it will not be compatible with the latest configuration
 
-1. 菜单提供查看日志功能
-2. 修复修改协议类型后打印结果未同步的bug
-3. 新增心跳检测配置
-   Tip: 现仅适用于v2rayN这种通过hysteria内核直接运行的方式
-        clash-Meta/passwall未适配,nekoray需要手动加入，一键链接不支持导入
-4. 减少增加的带宽冗余，防止填写带宽过大时冗余增量过高
-5. 修改重启服务间隔，增加至一周
+1. The menu provides the function of viewing logs
+2. Fix the bug that the print result is not synchronized after modifying the protocol type
+3. Added heartbeat detection configuration
+    Tip: It is only applicable to v2rayN, which runs directly through the hysteria kernel
+         Clash-Meta/passwall is not adapted, nekoray needs to be added manually, one-click link does not support import
+4. Reduce the increased bandwidth redundancy and prevent the redundancy increment from being too high when the bandwidth is too large
+5. Modify the restart service interval to one week
 ```
 
 #### (2022/09/10) 0.4.1:
 
 ```
-通知: 请使用wechat-video且hysteria Core版本低于1.2.1的用户更新双端
-因为hysteria 1.2.1修复了不开obfs导致wechat-video失效的bug,如果不更新
-会导致无法连接
+Notice: Please use wechat-video and users whose hysteria Core version is lower than 1.2.1 update the dual-end
+Because hysteria 1.2.1 fixed the bug that caused wechat-video to fail if obfs was not enabled, if it is not updated
+will result in a failure to connect
 
-1. 减小配置检测时等待时间，增加等待检测进程关闭的时间
-2. 新增常见问题
+1. Reduce the waiting time when configuring detection, and increase the time waiting for the detection process to close
+2. Add FAQ
 ```
 
 #### (2022/08/14) 0.4.0
 
 ```
-[v2rayN如果使用最新的配置,请更新客户端，clash_meta不影响]:
-1. 兼容hysteria 1.2.0 resolver与tun配置变动
-2. 使用DoH替代原来通过udp 53明文的dns请求，增加安全性
-3. 完善关于支持客户端的说明
+[If v2rayN uses the latest configuration, please update the client, clash_meta does not affect]:
+1. Compatible with hysteria 1.2.0 resolver and tun configuration changes
+2. Use DoH to replace the original dns request through udp 53 plaintext to increase security
+3. Improve the instructions on supporting clients
 ```
 
 #### (2022/07/07) 0.3.9
 
 ```
- [强烈建议更新server和client]:
-1. 支持导出一个clash.meta 配置文件，clash.meta作为客户端核心比起hysteria有着非常多的优势，详情查看介绍。[推荐/beta ing...]
-2. 修改acl规则生成来源，转化长期维护更新clash分流规则成hysteria acl规则，修复0.3.8.1 acl屏蔽规则
-3. hysteria里程碑更新至1.1.0, cpu开销减少，至少提升130%-500%速度，船烈建议更新两端
-4. 修改结果打印样式，更加清晰可见
+  [It is strongly recommended to update server and client]:
+1. Support exporting a clash.meta configuration file. As the client core, clash.meta has many advantages over hysteria. For details, see the introduction. [recommended/beta-ing...]
+2. Modify the generation source of acl rules, convert long-term maintenance and update clash shunt rules into hysteria acl rules, and repair 0.3.8.1 acl shielding rules
+3. The hysteria milestone is updated to 1.1.0, the cpu overhead is reduced, and the speed is increased by at least 130%-500%. Chuan strongly recommends updating both ends
+4. Modify the print style of the result to be more clearly visible
 ```
 
 #### (2022/06/26) 0.3.8
 
 ```
 
-1. 增加i686架构适配
-2. 增加端口443 80被其他进程占用导致无法申请证书的检测，提示信息并给出停止该进程选项
-   (不推荐，这里最好使用自签证书或者选择本地证书)
-3. 调整菜单
+1. Add i686 architecture adaptation
+2. Add the detection that port 443 80 is occupied by other processes and cannot apply for a certificate, prompt information and give the option to stop the process
+    (Not recommended, it is best to use a self-signed certificate or choose a local certificate here)
+3. Adjustment menu
 4. bug fixed
-5. 提供clash-meta支持（咕咕咕）
+5. Provide clash-meta support (cuckoo)
 ```
 
 #### (2022/05/14) 0.3.7
 
 ```
 
-1. 兼容hysteria 1.0.4,同时屏蔽udp/443 output(由于hysteria目前对udp无加速效果，防止网页走http/3减速)
-2. 增加修改当前协议功能，无需重复安装
-3. 兼容v2rayN,不再对cmd客户端优化
+1. Compatible with hysteria 1.0.4, and shield udp/443 output at the same time (since hysteria has no acceleration effect on udp at present, it prevents web pages from slowing down by http/3)
+2. Add the function of modifying the current protocol, no need to repeat the installation
+3. Compatible with v2rayN, no longer optimized for cmd client
 ```
 
 #### (2022/04/28) 0.3.6
 
 ```
 
-1. 识别系统默认防火墙管理端口，不再安装netfilter-persistent
-2. 提供使用本地路径下的证书加密方式，可自行上传到服务器可信的证书加密
-3. 开放自定义自签证书域名
-4. 修改buffer size计算
-5. git.io昨天被大量学术人员涌入对线，迫于压力不会停止已存在的规则，但还是保持可读，项目还是改回原来的短链接，我也被它反复横跳了:)
+1. Identify the system default firewall management port, no longer install netfilter-persistent
+2. Provide the certificate encryption method under the local path, which can be uploaded to the server by itself for trusted certificate encryption
+3. Open custom self-signed certificate domain names
+4. Modify the buffer size calculation
+5. git.io was flooded by a large number of academic personnel yesterday. Under pressure, the existing rules will not be stopped, but it is still readable. The project is still changed back to the original short link, and I was repeatedly jumped by it: )
 ```
 
 #### (2022/04/18) 0.3.5
 
 ```
 
-1. 完善开放防火墙端口的流程,为以后进一步细分端口打基础
-2. 加入s390x架构适配
-3. 加入v2rayN的说明[TEST]
+1. Improve the process of opening firewall ports to lay the foundation for further subdivision of ports in the future
+2. Add s390x architecture adaptation
+3. Added instructions for v2rayN [TEST]
 ```
 
 #### (2022/04/12) 0.3.4
 
 ```
-[请通过"重新安装/升级"选项更新]
-1. 修复高丢包环境下的断流问题
-2. 对齐菜单
-3. 增加命令检测而不是每次修改配置时重复install
+[Please update via the "Reinstall/Upgrade" option]
+1. Fix the disconnection problem in high packet loss environment
+2. Align menu
+3. Increase the command detection instead of repeating the install every time the configuration is modified
 ```
 
 #### (2022/04/01) 0.3.3
 
 ```
-[请通过"重新安装/升级"选项更新]
-1. 修复无法打印配置文件的bug
-2. 增加“修改当前配置”选项，无需重复安装
-3. 增加hihy和hysteria更新的提示以及手动更新选项
-4. 优化server端的目录结构，为以后更新做铺垫
+[Please update via the "Reinstall/Upgrade" option]
+1. Fix the bug that the configuration file cannot be printed
+2. Add the "Modify current configuration" option, no need to repeat the installation
+3. Add hihy and hysteria update prompts and manual update options
+4. Optimize the directory structure on the server side to pave the way for future updates
 ```
 
 #### (2022/03/28) 0.3.2
@@ -200,146 +200,146 @@ A: 上个版本为了兼容portHopping动了很多祖传代码，导致一堆bug
 ```
 
 1. update hysteria to 1.0.2
-2. 支持调整ipv4/ipv6优先级
-3. 修复没有lsof时安装失败的bug
+2. Support to adjust ipv4/ipv6 priority
+3. Fix the bug that the installation fails without lsof
 ```
 
 #### (2022/03/24) 0.3.1
 
 ```
 
-1. 将守护进程名再次改为hihy, 相较于原来的hihys和hysteria更加好记住
-2. 修复0.3.0无法卸载之前版本的hysteria的bug
-3. 创建守护进程之前增加配置检测功能，防止ACME不通过的用户反复横跳.
-4. 将菜单变得清晰
+1. Change the daemon process name to hihy again, which is easier to remember than the original hihys and hysteria
+2. Fix the bug that the previous version of hysteria cannot be uninstalled in 0.3.0
+3. Add the configuration detection function before creating the daemon process to prevent users who fail ACME from jumping repeatedly.
+4. Make the menu clearer
 ```
 
 #### (2022/03/21) 0.3.0
 
 ```
-(此次改进较多):
-1· 新增"菜单"功能，更新到0.3.0版本，后使用hihys命令即可调出菜单
-2. 将依赖的安装集中到的脚本内，无需手动安装了，并且完善系统检测流程
-3. 新增生成小火箭一键链接
-4. 优化脚本提示，重写了部分代码，更加方便增加新的功能
-5. 完善readme介绍部分，使之更加易懂，加入passwall的example图片
-6. 加入"高级玩法(伪"，介绍一些别的玩法
-7. 守护进程名称用hihys替代掉了hysteria
-8. 取消了S5默认带密码的配置
+(more improvements this time):
+1· Added "menu" function, updated to version 0.3.0, and then use the hihys command to call up the menu
+2. Centralize the dependent installation into the script, no need for manual installation, and improve the system detection process
+3. Add a one-click link to generate a small rocket
+4. Optimized script prompts, rewritten part of the code, more convenient to add new functions
+5. Improve the introduction part of the readme to make it easier to understand, and add the example picture of passwall
+6. Add "advanced gameplay (pseudo") to introduce some other gameplay
+7. The daemon name is replaced by hihys hysteria
+8. Canceled the S5 default configuration with password
 ```
 
 #### (2022/02/20 17:26) v0.2.9
 
 ```
-（旧客户端不兼容新服务端，建议一起更新）
-1、hysteria->1.0.1 hi_hysteria_cmd 0.2h，跳过1.0.0版本，s5出栈有bug
-1.0.1版本新增udp大包的分片和重组，效率进一步增强
-新的s5 outbound可配合warp或者xray进行分流，但目前没好的想法，先鸽了。
-2、新增自动放行防火墙
+(The old client is not compatible with the new server, it is recommended to update it together)
+1. hysteria->1.0.1 hi_hysteria_cmd 0.2h, skip version 1.0.0, s5There is a bug in the stack
+Version 1.0.1 adds fragmentation and reassembly of large udp packets, further enhancing efficiency
+The new s5 outbound can be used with warp or xray for shunting, but there is no good idea at present, so I will dove first.
+2. New automatic release firewall
 ```
 
 #### (2022/02/20 17:26) v0.2.8
 
 ```
 
-1、hysteria->0.9.7 hi_hysteria_cmd 0.2g
-2、PMTUD又回来了，建议升级
-3、自签证书时改回默认“允许不安全连接”，具体参考下方介绍
+1. hysteria->0.9.7 hi_hysteria_cmd 0.2g
+2. PMTUD is back, it is recommended to upgrade
+3. When self-signing the certificate, change it back to the default "Allow unsafe connections". For details, refer to the introduction below
 ```
 
 #### (2022/02/04 15:42) v0.2.7
 
 ```
-（希望更新到此版本,不向后兼容）
-1、update hysteria->0.9.6,hi_hysteria 0.2f
-2、上游quic-go不修bug，hysteria暂时禁用了PMTUD，删掉了原来的 disable_mtu_discovery选项，永远为true，缓解断流问题
-3、增加重新连接选项的支持，默认尝试5次，间隔3s
-4、开启一个新的板块和issue，收集限制udp传输的IDC和地级运营商，给各位排雷，如果发现请回复issue信息ou，谢谢～。
-（被限制udp传输，主要表现为服务端正常启动，但是客户端显示网络不可达这种情况）
+(Want to update to this version, not backwards compatible)
+1. update hysteria->0.9.6, hi_hysteria 0.2f
+2. The upstream quic-go does not fix bugs, hysteria temporarily disables PMTUD, and deletes the original disable_mtu_discovery option, which is always true to alleviate the disconnection problem
+3. Add support for reconnection option, try 5 times by default with an interval of 3s
+4. Open a new section and issue, collect IDCs and prefecture-level operators that restrict udp transmission, and clear mines for everyone. If you find any, please reply to the issue information ou, thank you ~.
+(Restricted udp transmission, mainly for the normal startup of the server, but the client shows that the network is unreachable)
 ```
 
 #### (2022/01/10 17:40) v0.2.6
 
 ```
 
-1、hi_hysteria 0.2e
-2、acl规则合并使用geoip替代（期待geosite
-3、自签改为wechat.com,取消允许不安全链接,详细查看关于自签说明
+1. hi_hysteria 0.2e
+2. Acl rules are merged and replaced by geoip (looking forward to geosite
+3. Change the self-signing to wechat.com, cancel the permission of unsafe links, and check the self-signing instructions in detail
 ```
 
 #### (2022/01/04 21:59) v0.2.5
 
 ```
 
-1、hysteria版本升级成了0.9.3，请重新下载"cmd客户端",version:0.2d
-！
-由于原项目使用github action编译带tun版本时，使用的最新的GLIBC_2.32
-很多系统目前没有很好的支持，有依赖问题
-所以我自己编译了v0.9.3 amd64，作为暂时的解决办法。
-！
-2、新增wechat视频通话流量伪装
-3、readme中加入各个协议类型介绍
-4、取消obfs选项支持（没必要开启它，当你的网络环境限制QUIC传输，可自行添加），大幅减小cpu的开销，提升速度
+1. The version of hysteria has been upgraded to 0.9.3, please re-download "cmd client", version:0.2d
+!
+Since the original project uses the github action to compile the version with tun, the latest GLIBC_2.32 is used
+Many systems are currently not well supported and have dependency issues
+So I compiled v0.9.3 amd64 myself, as a temporary workaround.
+!
+2. Add wechat video call traffic camouflage
+3. Add the introduction of each protocol type to readme
+4. Cancel the obfs option support (it is not necessary to enable it, when your network environment restricts QUIC transmission, you can add it yourself), greatly reduce the CPU overhead and increase the speed
 ```
 
 #### (2021/12/19 21:16) v0.2.4
 
 ```
 
-1、hysteria版本升级成了0.9.1，请重新下载"cmd客户端",version:0.2c
-2、增加faketcp模式配置，详情请查看：“使用前注意”条目
-3、outbound被鸽了
-4、客户端增加socks5（端口:8889）代理方式,user：pekora;password:pekopeko。可自行修改用户密码
-5、增加自定义dns如8.8.8.8等，防止运营商dns劫持攻击
+1. The hysteria version has been upgraded to 0.9.1, please re-download the "cmd client", version:0.2c
+2. Add faketcp mode configuration, for details, please check: "Note before use" item
+3. The outbound was pigeonholed
+4. The client adds socks5 (port: 8889) proxy mode, user: pekora; password: pekopeko. You can modify the user password by yourself
+5. Add custom dns such as 8.8.8.8 to prevent carrier dns hijacking attacks
 ```
 
 #### (2021/12/10 18:59) v0.2.3a
 
 ```
 
-1、hysteria版本升级成了0.9.0,请重新下载"cmd客户端"，version:0.2b（注: 因为0.9.0新的特征ipv6_only开启后无法解析ipv4，可以等下个版本所支持的outbound特征，这里就不特意添加了
-2、刷新了acl。
+1. The version of hysteria has been upgraded to 0.9.0, please re-download the "cmd client", version: 0.2b (Note: because the new feature ipv6_only of 0.9.0 cannot resolve ipv4, you can wait for the outbound supported by the next version features, which are not added here
+2. Refresh the acl.
 ```
 
 #### (2021/11/26 10:30) v0.2.3
 
 ```
 
-1、alpn改成了h3(虽然没什么必要)
-2、hysteria版本升级成了0.8.6请重新下载"cmd客户端?!"，version:0.2a
+1. Alpn changed to h3 (although it is not necessary)
+2. The version of hysteria has been upgraded to 0.8.6, please re-download "cmd client?!", version:0.2a
 ```
 
 #### (2021/11/08 19:50) v0.2.2
 
 ```
 
-1、整合自签/ACME
-2、更改buffer计算方式提升速度
-3、修复自签ipv6时多符号bug
-4、增加随机端口功能
-5、增加每一天自动重启服务端功能防止内存占用过大
+1. Integrate self-signed/ACME
+2. Change the buffer calculation method to improve the speed
+3. Fix multi-symbol bug when self-signed ipv6
+4. Add random port function
+5. Increase the function of automatically restarting the server every day to prevent excessive memory usage
 ```
 
 #### (2021/11/06 21:16) v0.2.1
 
 ```
 
-1、提供自签证书安装，为了有些ACME死活无法验证用户
+1. Provide self-signed certificate installation, so that some ACME cannot verify users
 ```
 
 #### (2021/10/05 18:36) v0.2
 
 ```
 
-1、优化客户端(！？)结构
-2、增加后台运行功能
+1. Optimize the client (!?) structure
+2. Increase background running function
 ```
 
 #### (2021/10/04 16:19) v0.1
 
 ```
 
-1、修复因dns污染无法代理的bug并增加去广告规则
-2、增加arm和mipsle架构适配
-3、增加客户端防呆
+1. Fix the bug that cannot be proxied due to dns pollution and add the rule of removing advertisements
+2. Add arm and mipsle architecture adaptation
+3. Increase client foolproof
 ```
