@@ -1,9 +1,9 @@
-#### 防火墙问题
+#### Firewall Issues
 
-请提前放行防火墙，保证该udp端口可达！
+Please release the firewall in advance to ensure that the udp port is reachable!
 
-仅对于**faketcp模式**，则为放行server的tcp端口。
+Only for **faketcp mode**, it is the tcp port of the release server.
 
-如果**不使用**自签方式，则应该放行**TCP 80/443**供hysteria内置的**ACME验证**。
+If **do not use** the self-signed method, you should release **TCP 80/443** for hysteria's built-in **ACME verification**.
 
-`0.2.9`**版本后脚本自动放行所需端口，请注意！**
+After version `0.2.9`**, the script automatically releases the required ports, please pay attention! **
