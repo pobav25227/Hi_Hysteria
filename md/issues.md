@@ -1,151 +1,151 @@
-## 常见问题/通知
+## FAQ/Notice
 
-### 下面给出的常见问题无法解决你的疑问?
+### The FAQ given below can't solve your query?
 
-应要求创建了一个TG群，帮助大家交流使用hysteria过程中遇到的问题
+A TG group was created upon request to help everyone exchange problems encountered in the process of using hysteria
 
 https://hihysteria.t.me/
 
-### 重要通知留档
+### Keep important notices on file
 
-这里可能有你解决问题的提示，有些时候hysteria的配置新版本和旧版本无法兼容导致出错
+There may be tips for you to solve the problem here. Sometimes the new version of hysteria configuration is not compatible with the old version, resulting in an error
 
-**很多时候出问题了更新服务端和客户端配置都能解决**
+**A lot of times there is a problem, updating the server and client configuration can solve it**
 
 #### (2022/09/10):
 
-请使用wechat-video且hysteria Core版本低于1.2.1的用户更新双端
+Please use wechat-video and users whose hysteria Core version is lower than 1.2.1 update the dual-end
 
-因为hysteria 1.2.1修复了不开obfs导致wechat-video失效的bug,如果不更新
-会导致无法连接
+Because hysteria 1.2.1 fixed the bug that caused wechat-video to fail if obfs was not enabled, if it is not updated
+will result in a failure to connect
 
-### 常见问题
+### common problem
 
-这里整理了一些常见的关于hihy使用过程中的问题，你如果遇到请不要急着开issue请在这里找一下说不定能解决。~~不要再开一些没有意义的issue了~~
+Here are some common problems about the use of hihy. If you encounter them, please don’t rush to open an issue. Please look here and maybe you can solve them. ~~ Don't open any more meaningless issues~~
 
-#### 1.hysteria速度一直提不上去怎么办?
+#### 1. What should I do if the hysteria speed cannot be increased?
 
-这个问题很笼统，你需要知道客户端和服务端都有瓶颈，如果需要极高的网络带宽服务端和客户端都要有相应的硬件支持和带宽支持。
+This question is very general. You need to know that both the client and the server have bottlenecks. If extremely high network bandwidth is required, both the server and the client must have corresponding hardware support and bandwidth support.
 
-QUIC比原生TCP对硬件的开销要大很多，往往很多时候限制你的是你的CPU
+QUIC has a lot more hardware overhead than native TCP, and often it is your CPU that limits you
 
-如果你使用的是udp协议(wechat-video/udp)这时就需要保证你本地的ISP没有对udp传输做限制，而且少部分IDC提供者也会对udp做限制，防止用户拿来滥用
+If you are using the udp protocol (wechat-video/udp), you need to ensure that your local ISP does not restrict udp transmission, and a small number of IDC providers will also restrict udp to prevent users from abusing it.
 
-不要随便填写上行带宽和下行带宽，按照自己真实水平填写，大于你cpu处理能力和网络带宽能力的期望也会有这个问题
+Don’t fill in the uplink bandwidth and downlink bandwidth casually, fill in according to your real level, if it is greater than your cpu processing ability and network bandwidth ability, you will also have this problem
 
-最后对于某些用这种lxc/openvz虚拟化无法更改 `net.core.rmem_max`，会导致在填写过高带宽时无法很好支持
+Finally, for some lxc/openvz virtualization, `net.core.rmem_max` cannot be changed, which will not support well when filling too high bandwidth
 
-#### 2.一直无法连接怎么办？/连接报错怎么办？/有时可以用，有时不能用怎么办？
+#### 2. What should I do if I have been unable to connect? What should I do if the connection error is reported? /What if it works sometimes and sometimes doesn't?
 
-首先你要保证你的服务端能正常启动
+First of all, you need to ensure that your server can start normally
 
-其次能保证你客户端配置没有报错
+Secondly, you can ensure that your client configuration does not report errors
 
-如果日志还表现为 `[error:timeout: no recent network activity] Failed to initialize client`
+If the log still shows `[error:timeout: no recent network activity] Failed to initialize client`
 
-请查看你的IDC是否在[黑名单](blacklist.md)里,如果以上都不满足请看下方
+Please check if your IDC is in [Blacklist](blacklist.md), if none of the above is satisfied, please see below
 
-* 你没有打开云平台的防火墙，很多时候本机防火墙和云防火墙是分开的，hihy会自动打开本地防火墙，云防火墙需要你手动启动，关于启动说明看[这里](firewall.md)
-* 你本地使用的ISP限制严格无法通行非常规udp协议，请切换协议类型尝试或者用faketcp
-* 配置错误没有察觉，请重新检查一遍
-* 你的IDC未被黑名单收集，请到此[issue](https://github.com/emptysuns/Hi_Hysteria/issues/9)提交
+* You have not opened the firewall of the cloud platform. In many cases, the local firewall and the cloud firewall are separated. hihy will automatically open the local firewall. The cloud firewall needs to be started manually. See [here] (firewall.md) for the startup instructions.
+* Your local ISP is strictly restricted and cannot pass the unconventional udp protocol, please switch the protocol type to try or use faketcp
+* I didn't notice the configuration error, please check it again
+* Your IDC has not been collected by the blacklist, please submit it here [issue](https://github.com/emptysuns/Hi_Hysteria/issues/9)
 
-#### 3.提示不支持此系统怎么办？
+#### 3. What should I do if the system is not supported?
 
-你的系统太老了，不是主流社区维护的版本，比如软件更新源已经不支持更新了，这种系统单靠脚本是很难支持全的，这里就自己解决了
+Your system is too old and is not a version maintained by the mainstream community. For example, the software update source no longer supports updates. It is difficult to support this kind of system with scripts alone. Here we can solve it by ourselves.
 
-或者你的系统经过了服务提供商魔改，hihy无法识别系统类型这就无法进行接下来的步骤，也会报错
+Or your system has been magically modified by the service provider, hihy cannot recognize the system type, so the next steps cannot be performed, and an error will also be reported
 
-这种问题请自己安装成当前主流的镜像，方法很多这里就不说明了
+For this kind of problem, please install it yourself as the current mainstream mirror image. There are many methods that will not be explained here.
 
-#### 4.脚本无法正常启动
+#### 4. The script cannot be started normally
 
-每次运行 `hihy`都需要通过github获取最新信息，你的ip可能被github拉黑了或者根本无法连接github
+Every time you run `hihy`, you need to get the latest information through github, your ip may be blocked by github or you cannot connect to github at all
 
-#### 5.用hysteria会被墙吗？
+#### 5. Will I be blocked if I use hysteria?
 
-目前未被针对，不知道以后如何，就算被针对由于是开源项目也会有很多人贡献代码对抗封锁的，参考隔壁ss。在这里感谢hysteria的开发者做的无私贡献。
+It has not been targeted at present, and I don’t know what will happen in the future. Even if it is targeted because it is an open source project, many people will contribute code to fight against the blockade. Refer to ss next door. Thanks to the developers of hysteria for their selfless contributions.
 
-#### 6.Sagernet / Matsuri无法连接问题
+#### 6. Sagernet / Matsuri cannot connect
 
-请在github或者google play商店装上Hysteria-plugin并且**允许被其他应用启动**
-现在不推荐使用sagernet,已经停止更新好长时间了,建议使用Matsuri
+Please install Hysteria-plugin on github or google play store and **allow it to be started by other apps**
+It is not recommended to use sagernet now, it has stopped updating for a long time, it is recommended to use Matsuri
 
-#### 7.cpu占用这么高，hihy不会藏挖矿了吧？
+#### 7. The cpu usage is so high, hihy won't hide mining, right?
 
 :)
 
-所有渣代码没有加密，短链接使用的git.io，无法根据client不同返回不同值
+All slag codes are not encrypted, and the git.io used by the short link cannot return different values depending on the client
 
-即**均可查，童叟无欺**
+That is, ** can be checked, and the old and the old are not deceived**
 
-占用高是QUIC的特点
+High occupancy is the characteristic of QUIC
 
-#### 8.如何选择是否使用obfs混淆
+#### 8. How to choose whether to use obfs confusion
 
-obfs是用来混淆流量成未知流量的选项，开启它将会最大程度的对抗封锁，但是有优点和缺点
-优点：
+obfs is an option used to confuse traffic into unknown traffic. Turning it on will resist blocking to the greatest extent, but it has advantages and disadvantages
+advantage:
 
-1. 抗封锁
-2. 未知流量安全性强
-3. 能够隐藏证书握手信息，可以配合使用自签证书
+1. Anti-blocking
+2. Strong security for unknown traffic
+3. It can hide certificate handshake information and can be used in conjunction with self-signed certificates
 
-缺点：
+shortcoming:
 
-1. 对cpu开销大，如果性能不好会影响速度
-2. 对某些有协议白名单的IDC来说，未知udp流量往往被认为是攻击，遭到阻断，客户端无法连接到服务端
+1. The CPU overhead is high, and if the performance is not good, it will affect the speed
+2. For some IDCs with protocol whitelists, unknown udp traffic is often considered an attack and blocked, and the client cannot connect to the server
 
-#### 9.关于自签证书的解疑
+#### 9. Questions about self-signed certificates
 
-目前自签证书使用的CA是固定的，是Tencent Root CA，这肯定是不合法的
+At present, the CA used by the self-signed certificate is fixed, it is Tencent Root CA, which is definitely illegal
 
-之前一段时间使用自签证书完全没有任何问题，但是自从202210开始，观察到自签证书流量会遭到一定规模的阻断，也就是说会断流
+There was no problem with using self-signed certificates some time ago, but since 202210, it has been observed that the flow of self-signed certificates will be blocked on a certain scale, that is to say, the flow will be cut off
 
-所以你在希望自签证书时，我推荐你使用obfs，折损性能换来稳定
+So when you want a self-signed certificate, I recommend you to use obfs, which compromises performance in exchange for stability
 
-如果可能的话，推荐使用sing-box配置hysteria使用其中的shadow-tls
+If possible, it is recommended to use sing-box to configure hysteria to use shadow-tls
 
 
-#### 10. 最近有的UDP阻断现象
+#### 10. Recent UDP blocking phenomenon
 
-注意：下面的内容没有经过大量调查，仅说说我碰到的情况，仅供参考
+Note: The following content has not undergone a lot of investigation, just talk about the situation I encountered, for reference only
 
-众所周知，GFW是黑盒，我们只能通过猜来解释一些现象
+As we all know, GFW is a black box, we can only explain some phenomena by guessing
 
-hysteria用到现在了，也确实该被它针对了
+Hysteria is used now, and it should be targeted by it
 
-不同地区不同运营商对UDP的策略都不同，举个例子：
+Different operators in different regions have different strategies for UDP. For example:
 
-可能同地区电信没事，移动有事
+It may be that the telecom in the same area is fine, but there is something wrong with mobile
 
-北京的电信没事，上海的电信有事
+Telecom in Beijing is fine, Telecom in Shanghai is in trouble
 
-这个我没办法帮你总结，只能靠你自己测试，总的来说至少还有faketcp兜底
+I can't help you summarize this, you can only test it yourself, in general, at least faketcp has the bottom line
 
-我描述一下我遇到的udp被限制的问题:
+Let me describe the problem of udp being restricted that I encountered:
 
-* 协议: wechat-video
+* Protocol: wechat-video
 
-* 证书: ACME申请的可信证书
+* Certificate: Trusted certificate applied by ACME
 
-* 是否多端口: 否
+* Whether multi-port: No
 
-* 是否使用obfs混淆: 否
-* 网络: 电信 -> 一个冷门机房
-* 现象: 服务器A用hihy搭的，使用了好几个月，**一直是单端口连接**，后来突然发现不能用了，换其他节点之后用很短的一段时间又被阻断了，udp连接不上，faketcp没问题
+* Whether to use obfs obfuscation: No
+* Network: Telecom -> a cold computer room
+* Phenomenon: Server A was set up with hihy, and it has been used for several months. **It has always been a single-port connection**. Then it suddenly found that it could not be used. After changing to other nodes, it was blocked again after a short period of time. Udp Can't connect, faketcp is fine
 
-这个现象使用PPPoE重新网络拨号之后解决了，然后第二天正常用，晚高峰时（九点左右）相同的现象又出现了
+This phenomenon was solved after using PPPoE to re-dial up the network, and then it was used normally the next day, and the same phenomenon appeared again during the evening peak (around nine o’clock).
 
-具体就是，所有的udp连接都在**连接成功后**，**短时间内**被阻断了，换节点无效，**无论换的节点（服务器B、C、D，均是其他机房）是否使用了obfs、是不是多端口，只有用faketcp能连上**。
+Specifically, all udp connections are blocked in a **short period of time** after the **connection is successful**, and changing nodes is invalid, **regardless of the changed nodes (servers B, C, D, are other Computer room) Whether obfs is used, whether it is multi-port, only faketcp can connect to **.
 
-后来我**换了协议成udp开启了obfs**还是一样的现象
+Later I** changed the protocol to udp and enabled obfs** still the same phenomenon
 
-* 原因猜测: 这次阻断是根据连上**服务器A的源IP**进行的，也就是说只要检测到**连服务器A该端口udp流量**有异常就会对**连接该端口的所有源地址**进行UDP限制
+* Guess the reason: this block is based on the source IP** connected to **server A, that is to say, as long as there is an abnormality in the udp traffic on the port of **connecting to server A**, it will connect to the **server A All source addresses of ports** are UDP restricted
 
-虽然听着绕，但是经过我半个月的测试，也确实是这么个情况
+Although it sounds confusing, after half a month of testing, it is indeed the case
 
-不确定是不是hysteria不开obfs的情况下流量被识别的问题，这个可能性我认为很小，应该是针对udp流量的通杀
+I’m not sure if it’s the problem of traffic being recognized when hysteria doesn’t open obfs. I think this possibility is very small, and it should be a pass-kill for udp traffic.
 
-* 解决办法：我这里给出我的解决办法，还是**相同的**服务器A更换其他端口并打开obfs，然后没出现过上面的现象
+* Solution: I will give my solution here, it is still the **same** server A, change another port and open obfs, and then the above phenomenon does not appear
 
-### 11. 待补充...
+### 11. To be added...
