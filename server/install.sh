@@ -76,7 +76,7 @@ function checkSystemForUpdate() {
 	fi
 
 	if [[ -z ${release} ]]; then
-		echoColor red "\n本脚本不支持此系统,请将下方日志反馈给开发者\n"
+		echoColor red "\nThis script does not support this system, please feedback the log below to the developer\n"
 		echoColor yellow "$(cat /etc/issue)"
 		echoColor yellow "$(cat /proc/version)"
 		exit 0
@@ -123,18 +123,17 @@ function printMsg(){
 	cp -P /etc/hihy/result/metaHys.yaml ./Hys-${remarks}\(clashMeta\).yaml
 	echoColor yellow "--------------------------------------------"
 	echo ""
-	echo -e  "\033[1;;35m1* [\033[0m\033[31mv2rayN/Matsuri/nekobox/nekoray\033[0m\033[1;;35m] 使用hysteria core直接运行: \033[0m"
-	echoColor green "客户端配置文件输出至: `pwd`/Hys-${remarks}(v2rayN).json ( 直接下载生成的配置文件[推荐] / 自行复制粘贴下方配置到本地 )"
-	echoColor green "Tips:客户端默认只开启http(10809)、socks5(10808)代理!其他方式请参照hysteria文档自行修改客户端config.json"
-	echoColor skyBlue "↓***********************************↓↓↓copy↓↓↓*******************************↓"
+	echo -e "\033[1;;35m1* [\033[0m\033[31mv2rayN/Matsuri/nekobox/nekoray\033[0m\033[1;;35m] Use hysteria core to run directly: \033[0m"
+	echoColor green "The client configuration file is output to: `pwd`/Hys-${remarks}(v2rayN).json (directly download the generated configuration file [recommended] / copy and paste the configuration below to local)"
+	echoColor green "Tips: The client only enables http (10809), socks5 (10808) proxy by default! For other methods, please refer to the hysteria documentation to modify the client config.json"
+	echoColor skyBlue "↓************************************↓↓↓copy↓↓↓**** *****************************↓"
 	cat ./Hys-${remarks}\(v2rayN\).json
 	echoColor skyBlue "↑***********************************↑↑↑copy↑↑↑*******************************↑\n"
 	url=`cat /etc/hihy/result/url.txt`
 	echo -e  "\033[1;;35m2* [\033[0m\033[31mShadowrocket/Matsuri/nekobox/Passwall\033[0m\033[1;;35m] 一键链接: \033[0m"
 	echoColor green ${url}
 	echo -e "\n"
-	echo -e  "\033[1;;35m3* [\033[0m\033[31mClash.Meta\033[0m\033[1;;35m] 配置文件已在`pwd`/Hys-${remarks}(clashMeta).yaml输出,请下载至客户端使用(beta)\033[0m"
-	echoColor yellow "--------------------------------------------"
+	echo -e "\033[1;;35m3* [\033[0m\033[31mClash.Meta\033[0m\033[1;;35m] The configuration file is already in `pwd`/Hys-${remarks}( clashMeta).yaml output, please download to the client to use (beta)\033[0m"	echoColor yellow "--------------------------------------------"
 }
 
 function hihy(){
@@ -152,8 +151,8 @@ function changeIp64(){
 	now=`cat /etc/hihy/conf/hihyServer.json | grep "resolve_preference"`
     case ${now} in 
 		*"64"*)
-			echoColor purple "当前ipv6优先"
-            echoColor yellow " \n->设置ipv4优先级高于ipv6?(Y/N,默认N)"
+			echoColor purple "current ipv6 priority"
+            echoColor yellow "\n->Set ipv4 priority higher than ipv6? (Y/N, default N)"
             read input
             if [ -z "${input}" ];then
                 echoColor green "Ignore."
@@ -166,9 +165,9 @@ function changeIp64(){
             
 		;;
 		*"46"*)
-			echoColor purple "当前ipv4优先"
-            echoColor yellow " \n->设置ipv6优先级高于ipv4?(Y/N,默认N)"
-            read input
+			echoColor purple "current ipv4 priority"
+            echoColor yellow "\n->Set ipv6 priority higher than ipv4? (Y/N, default N)"    
+			read input
             if [ -z "${input}" ];then
                 echoColor green "Ignore."
                 exit
@@ -195,13 +194,13 @@ function getPortBindMsg(){
 				command=`echo ${msg} | awk '{print $1}'`
   				pid=`echo ${msg} | awk '{print $2}'`
   				name=`echo ${msg} | awk '{print $9}'`
-          		echoColor purple "Port: ${1}/${2} 已经被 ${command}(${name}) 占用,进程pid为: ${pid}."
-  				echoColor green "是否自动关闭端口占用?(y/N)"
+          		echoColor purple "Port: ${1}/${2} has been occupied by ${command}(${name}), the process pid is: ${pid}."
+				echoColor green "Do you automatically close the port occupation? (y/N)"
 				read bindP
 				if [ -z "${bindP}" ];then
-					echoColor red "由于端口被占用，退出安装。请手动关闭或者更换端口..."
+					echoColor red "Exit the installation because the port is occupied. Please manually close or replace the port..."
 					if [ "${1}" == "TCP" ] && [ "${2}" == "80" ];then
-						echoColor "如果需求上无法关闭 ${1}/${2}端口，请使用其他证书获取方式"
+						echoColor "If the ${1}/${2} ports cannot be closed according to requirements, please use other certificate acquisition methods"
 					fi
 					exit
 				elif [ "${bindP}" == "y" ] ||  [ "${bindP}" == "Y" ];then
@@ -214,15 +213,15 @@ function getPortBindMsg(){
 						msg=`lsof -i ${1}:${2}`
 					fi
         			if [ "${msg}" != "" ];then
-						echoColor red "端口占用关闭失败,强制杀死进程后进程重启,请查看是否存在守护进程..."
+						echoColor red "The port occupancy shutdown failed. The process restarts after the process is forcibly killed. Please check whether there is a daemon process..."
 						exit
 					else
-						echoColor green "端口解绑成功..."
+						echoColor green "Port unbind successfully..."
 					fi
 				else
-					echoColor red "由于端口被占用，退出安装。请手动关闭或者更换端口..."
+					echoColor red "Exit the installation because the port is occupied. Please manually close or replace the port..."
 					if [ "${1}" == "TCP" ] && [ "${2}" == "80" ];then
-						echoColor "如果需求上如果无法关闭 ${1}/${2}端口，请使用其他证书获取方式"
+						echoColor "If the ${1}/${2} ports cannot be closed according to requirements, please use other certificate acquisition methods"
 					fi
 					exit
 				fi
@@ -231,82 +230,82 @@ function getPortBindMsg(){
 
 function setHysteriaConfig(){
 	mkdir -p /etc/hihy/bin /etc/hihy/conf /etc/hihy/cert  /etc/hihy/result /etc/hihy/acl
-	echoColor yellowBlack "开始配置:"
-	echo -e "\033[32m请选择证书申请方式:\n\n\033[0m\033[33m\033[01m1、使用ACME申请(推荐,需打开tcp 80/443)\n2、使用本地证书文件\n3、自签证书\033[0m\033[32m\n\n输入序号:\033[0m"
+	echoColor yellowBlack "Start configuration:"
+	echo -e "\033[32mPlease select the certificate application method:\n\n\033[0m\033[33m\033[01m1, use ACME to apply (recommended, need to open tcp 80/443)\n2, use local certificate file\n3 、Self-signed certificate\033[0m\033[32m\n\nEnter serial number:\033[0m"
     read certNum
 	useAcme=false
 	useLocalCert=false
 	if [ -z "${certNum}" ] || [ "${certNum}" == "3" ];then
-		echo -e  "\n注意:自签证书近一段时间来无obfs情况下,遭到大量随机阻断"
-		echoColor red "如果一定要使用自签证书,请在下方配置选择使用obfs混淆验证,保证安全"
-		echoColor green "请输入自签证书的域名(默认:wechat.com):"
+		echo -e "\nNote: The self-signed certificate has been randomly blocked in recent times without obfs"
+		echoColor red "If you must use a self-signed certificate, please choose to use obfs obfuscated verification in the configuration below to ensure security"
+		echoColor green "Please enter the domain name of the self-signed certificate (default: wechat.com):"
 		read domain
 		if [ -z "${domain}" ];then
 			domain="wechat.com"
 		fi
-		echo -e "->自签证书域名为:"`echoColor red ${domain}`"\n"
+		echo -e "->Self-signed certificate domain name is:"`echoColor red ${domain}`"\n"
 		ip=`curl -4 -s -m 8 ip.sb`
 		if [ -z "${ip}" ];then
 			ip=`curl -s -m 8 ip.sb`
 		fi
-		echoColor green "判断客户端连接所使用的地址是否正确?公网ip:"`echoColor red ${ip}`"\n"
+		echoColor green "Judge whether the address used by the client connection is correct? Public network ip:"`echoColor red ${ip}`"\n"
 		while true
 		do	
-			echo -e "\033[32m请选择:\n\n\033[0m\033[33m\033[01m1、正确(默认)\n2、不正确,手动输入ip\033[0m\033[32m\n\n输入序号:\033[0m"
+			echo -e "\033[32m please choose:\n\n\033[0m\033[33m\033[01m1, correct (default)\n2, incorrect, manually input ip\033[0m\033[32m\n\n Enter serial number:\033[0m"
 			read ipNum
 			if [ -z "${ipNum}" ] || [ "${ipNum}" == "1" ];then
 				break
 			elif [ "${ipNum}" == "2" ];then
-				echoColor green "请输入正确的公网ip(ipv6地址不需要加[]):"
+				echoColor green "Please enter the correct public network ip (ipv6 address does not need to add []):"
 				read ip
 				if [ -z "${ip}" ];then
-					echoColor red "输入错误,请重新输入..."
+					echoColor red "Input errors, please re-enter..."
 					continue
 				fi
 				break
 			else
-				echoColor red "\n->输入错误,请重新输入:"
+				echoColor red "\n->Input error, please re-enter:"
 			fi
 		done		
 		cert="/etc/hihy/cert/${domain}.crt"
 		key="/etc/hihy/cert/${domain}.key"
 		useAcme=false
-		echoColor purple "\n\n->您已选择自签${domain}证书加密.公网ip:"`echoColor red ${ip}`"\n"
+		echoColor purple "\n\n->You have chosen self-signed ${domain} certificate encryption. Public network ip:"`echoColor red ${ip}`"\n"
 		echo -e "\n"
     elif [ "${certNum}" == "2" ];then
-		echoColor green "请输入证书cert文件路径(需fullchain cert,提供完整证书链):"
+		echoColor green "Please enter the certificate cert file path (requires fullchain cert, provide a complete certificate chain):"
 		read cert
 		while :
 		do
 			if [ ! -f "${cert}" ];then
-				echoColor red "\n\n->路径不存在,请重新输入!"
-				echoColor green "请输入证书cert文件路径:"
+				echoColor red "\n\n->Path does not exist, please re-enter!"
+				echoColor green "Please enter the certificate file path:"
 				read  cert
 			else
 				break
 			fi
 		done
-		echo -e "\n\n->cert文件路径: "`echoColor red ${cert}`"\n"
-		echoColor green "请输入证书key文件路径:"
+		echo -e "\n\n->cert file path: "`echoColor red ${cert}`"\n"
+		echoColor green "Please enter the certificate key file path:"
 		read key
 		while :
 		do
 			if [ ! -f "${key}" ];then
-				echoColor red "\n\n->路径不存在,请重新输入!"
-				echoColor green "请输入证书key文件路径:"
+				echoColor red "\n\n->Path does not exist, please re-enter!"
+				echoColor green "Please enter the certificate key file path:"
 				read  key
 			else
 				break
 			fi
 		done
-		echo -e "\n\n->key文件路径: "`echoColor red ${key}`"\n"
-		echoColor green "请输入所选证书域名:"
+		echo -e "\n\n->key file path: "`echoColor red ${key}`"\n"
+		echoColor green "Please enter the domain name of the selected certificate:"
 		read domain
 		while :
 		do
 			if [ -z "${domain}" ];then
-				echoColor red "\n\n->此选项不能为空,请重新输入!"
-				echoColor green "请输入所选证书域名:"
+				echoColor red "\n\n->This option cannot be empty, please re-enter!"
+				echoColor green "Please enter the domain name of the selected certificate:"
 				read  domain
 			else
 				break
@@ -314,15 +313,15 @@ function setHysteriaConfig(){
 		done
 		useAcme=false
 		useLocalCert=true
-		echoColor purple "\n\n->您已选择本地证书加密.域名:"`echoColor red ${domain}`"\n"
+		echoColor purple "\n\n->You have selected local certificate encryption. Domain name: "`echoColor red ${domain}`"\n"
     else 
-    	echoColor green "请输入域名(需正确解析到本机,关闭CDN):"
+    	echoColor green "Please enter the domain name (it needs to be correctly resolved to the local machine, and the CDN is turned off):"
 		read domain
 		while :
 		do
 			if [ -z "${domain}" ];then
-				echoColor red "\n\n->此选项不能为空,请重新输入!"
-				echoColor green "请输入域名(需正确解析到本机,关闭CDN):"
+				echoColor red "\n\n->This option cannot be empty, please re-enter!"
+				echoColor green "Please enter the domain name (it needs to be correctly resolved to the local machine, and the CDN is turned off):"
 				read  domain
 			else
 				break
@@ -330,14 +329,14 @@ function setHysteriaConfig(){
 		done
 		while :
 		do	
-			echoColor purple "\n->检测${domain},DNS解析..."
+			echoColor purple "\n->Detect ${domain}, DNS resolution..."
 			ip_resolv=`dig +short ${domain} A`
 			if [ -z "${ip_resolv}" ];then
 				ip_resolv=`dig +short ${domain} AAAA`
 			fi
 			if [ -z "${ip_resolv}" ];then
-				echoColor red "\n\n->域名解析失败,没有获得任何dns记录(A/AAAA),请检查域名是否正确解析到本机!"
-				echoColor green "请输入域名(需正确解析到本机,关闭CDN):"
+				echoColor red "\n\n->The domain name resolution failed, no dns record (A/AAAA) was obtained, please check whether the domain name is correctly resolved to this machine!"
+				echoColor green "Please enter the domain name (it needs to be correctly resolved to the local machine, and the CDN is turned off):"
 				read  domain
 				continue
 			fi
@@ -350,24 +349,24 @@ function setHysteriaConfig(){
 				localip=`curl -4 -s -m 8 ip.sb`
 			fi
 			if [ -z "${localip}" ];then
-				localip=`curl -s -m 8 ip.sb` #如果上面的ip.sb都失败了,最后检测一次
+				localip=`curl -s -m 8 ip.sb` #If the above ip.sb fails, the last test
 				if [ -z "${localip}" ];then
-					echoColor red "\n\n->获取本机ip失败,请检查网络连接!curl -s -m 8 ip.sb"
+					echoColor red "\n\n->failed to get local ip, please check network connection!curl -s -m 8 ip.sb"
 					exit 1
 				fi
 			fi
 			if [ "${localip}" != "${remoteip}" ];then
-				echo -e " \n\n->本机ip: "`echoColor red ${localip}`" \n\n->域名ip: "`echoColor red ${remoteip}`"\n"
-				echoColor green "多ip或者dns未生效时可能检测失败,如果你确定正确解析到了本机,是否自己指定本机ip? [y/N]:"
+				echo -e " \n\n->local ip: "`echoColor red ${localip}`" \n\n->domain name ip: "`echoColor red ${remoteip}`"\n"
+				echoColor green "The detection may fail when multiple ip or dns are not in effect. If you are sure that the local machine is resolved correctly, do you want to specify the local ip yourself? [y/N]:"
 				read isLocalip
 				if [ "${isLocalip}" == "y" ];then
-					echoColor green "请自行输入本机ip:"
+					echoColor green "Please enter the local ip:"
 					read localip
 					while :
 					do
 						if [ -z "${localip}" ];then
-							echoColor red "\n\n->此选项不能为空,请重新输入!"
-							echoColor green "请输入本机ip:"
+							echoColor red "\n\n->This option cannot be empty, please re-enter!"
+							echoColor green "Please enter the local ip:"
 							read  localip
 						else
 							break
@@ -375,8 +374,8 @@ function setHysteriaConfig(){
 					done
 				fi
 				if [ "${localip}" != "${remoteip}" ];then
-					echoColor red "\n\n->域名解析到的ip与本机ip不一致,请重新输入!"
-					echoColor green "请输入域名(需正确解析到本机,关闭CDN):"
+					echoColor red "\n\n->The ip resolved by the domain name is inconsistent with the local ip, please re-enter!"
+					echoColor green "Please enter the domain name (it needs to be correctly resolved to the local machine, and the CDN is turned off):"
 					read  domain
 					continue
 				else
@@ -387,10 +386,10 @@ function setHysteriaConfig(){
 			fi
 		done
 		useAcme=true
-		echoColor purple "\n\n->解析正确,使用hysteria内置ACME申请证书.域名:"`echoColor red ${domain}`"\n"
+		echoColor purple "\n\n->The parsing is correct, use hysteria's built-in ACME to apply for a certificate. Domain name: "`echoColor red ${domain}`"\n"
     fi
 
-    echo -e "\033[32m选择协议类型:\n\n\033[0m\033[33m\033[01m1、udp(QUIC,可启动端口跳跃)\n2、faketcp\n3、wechat-video(默认)\033[0m\033[32m\n\n输入序号:\033[0m"
+    echo -e "\033[32m Select protocol type:\n\n\033[0m\033[33m\033[01m1, udp (QUIC, can start port jumping)\n2, faketcp\n3, wechat-video (default )\033[0m\033[32m\n\nEnter serial number:\033[0m"
     read protocol
 	ut=
     if [ -z "${protocol}" ] || [ $protocol == "3" ];then
@@ -407,16 +406,16 @@ function setHysteriaConfig(){
 
 	while :
 	do
-		echoColor green "请输入你想要开启的端口,此端口是server端口,建议10000-65535.(默认随机)"
+		echoColor green "Please enter the port you want to open. This port is the server port. 10000-65535 is recommended. (Random by default)"
 		read  port
 		if [ -z "${port}" ];then
 			port=$(($(od -An -N2 -i /dev/random) % (65534 - 10001) + 10001))
-			echo -e "\n->使用随机端口:"`echoColor red ${ut}/${port}`"\n"
+			echo -e "\n->Use random port:"`echoColor red ${ut}/${port}`"\n"
 		else
-			echo -e "\n->您输入的端口:"`echoColor red ${ut}/${port}`"\n"
+			echo -e "\n->The port you entered:"`echoColor red ${ut}/${port}`"\n"
 		fi
 		if [ "${port}" -gt 65535 ];then
-			echoColor red "端口范围错误,请重新输入!"
+			echoColor red "The port range is wrong, please re-enter!"
 			continue
 		fi
 		if [ "${ut}" != "udp" ];then
@@ -426,7 +425,7 @@ function setHysteriaConfig(){
 		fi
 		if [ "$pIDa" != "" ];
 		then
-			echoColor red "\n->端口${port}被占用,PID:${pIDa}!请重新输入或者运行kill -9 ${pIDa}后重新安装!"
+			echoColor red "\n->Port ${port} is occupied, PID: ${pIDa}! Please re-enter or run kill -9 ${pIDa} and reinstall!"
 		else
 			break
 		fi
@@ -434,48 +433,48 @@ function setHysteriaConfig(){
 	done
 	clientPort="${port}"
 	if [ "${protocol}" == "udp" ];then
-		echoColor green "\n->检测到您选择udp协议,可使用[端口跳跃/多端口](Port Hopping)功能,推荐使用"
-		echo -e "Tip: 长时间单端口 UDP 连接容易被运营商封锁/QoS/断流,启动此功能可以有效避免此问题."
-		echo -e "更加详细介绍请参考: https://github.com/emptysuns/Hi_Hysteria/blob/main/md/portHopping.md\n"
-		echo -e "\033[32m选择是否启用:\n\n\033[0m\033[33m\033[01m1、启用(默认)\n2、跳过\033[0m\033[32m\n\n输入序号:\033[0m"
+		echoColor green "\n->It is detected that you have selected the udp protocol, you can use the [Port Hopping/Multiport] (Port Hopping) function, it is recommended to use"
+		echo -e "Tip: The long-term single-port UDP connection is easy to be blocked by the operator/QoS/cut off, enabling this function can effectively avoid this problem."
+		echo -e "For more details, please refer to: https://github.com/emptysuns/Hi_Hysteria/blob/main/md/portHopping.md\n"
+		echo -e "\033[32m choose whether to enable:\n\n\033[0m\033[33m\033[01m1, enable (default)\n2, skip\033[0m\033[32m\n\n Enter serial number:\033[0m"
 		read portHoppingStatus
 		if [ -z "${portHoppingStatus}" ] || [ $portHoppingStatus == "1" ];then
 			portHoppingStatus="true"
-			echoColor purple "\n->您选择启用端口跳跃/多端口(Port Hopping)功能"
-			echo -e "端口跳跃/多端口(Port Hopping)功能需要占用多个端口,请保证这些端口没有监听其他服务\nTip: 端口选择数量不宜过多,推荐1000个左右,范围1-65535,建议选择连续的端口范围.\n"
+			echoColor purple "\n->You choose to enable Port Hopping/Multiple Ports (Port Hopping)"
+			echo -e "The port hopping/multi-port (Port Hopping) function needs to occupy multiple ports, please ensure that these ports are not listening to other services\nTip: The number of ports should not be too many, about 1000 are recommended, the range is 1-65535, it is recommended to choose Contiguous port range.\n"		
 			while :
 			do
-				echoColor green "请输入起始端口(默认47000):"
+				echoColor green "Please enter the starting port (default 47000):"
 				read  portHoppingStart
 				if [ -z "${portHoppingStart}" ];then
 					portHoppingStart=47000
 				fi
 				if [ $portHoppingStart -gt 65535 ];then
-					echoColor red "\n->端口范围错误,请重新输入!"
+					echoColor red "\n->The port range is wrong, please re-enter!"
 					continue
 				fi
-				echo -e "\n->起始端口:"`echoColor red ${portHoppingStart}`"\n"
-				echoColor green "请输入结束端口(默认48000):"
+				echo -e "\n->Start port:"`echoColor red ${portHoppingStart}`"\n"
+				echoColor green "Please enter the end port (default 48000):"
 				read  portHoppingEnd
 				if [ -z "${portHoppingEnd}" ];then
 					portHoppingEnd=48000
 				fi
 				if [ $portHoppingEnd -gt 65535 ];then
-					echoColor red "\n->端口范围错误,请重新输入!"
+					echoColor red "\n->The port range is wrong, please re-enter!"
 					continue
 				fi
-				echo -e "\n->结束端口:"`echoColor red ${portHoppingEnd}`"\n"
+				echo -e "\n->end port:"`echoColor red ${portHoppingEnd}`"\n"
 				if [ $portHoppingStart -ge $portHoppingEnd ];then
-					echoColor red "\n->起始端口必须小于结束端口,请重新输入!"
+					echoColor red "\n->The start port must be smaller than the end port, please re-enter!"
 				else
 					break
 				fi
 			done
 			clientPort="${port},${portHoppingStart}-${portHoppingEnd}"
-			echo -e "\n->您选择的端口跳跃/多端口(Port Hopping)参数为: "`echoColor red ${portHoppingStart}:${portHoppingEnd}`"\n"
+			echo -e "\n->The port hopping/multi-port (Port Hopping) parameter you selected is: "`echoColor red ${portHoppingStart}:${portHoppingEnd}`"\n"
 		else
 			portHoppingStatus="false"
-			echoColor red "\n->您选择跳过端口跳跃/多端口(Port Hopping)功能"
+			echoColor red "\n->You choose to skip Port Hopping/Multiport (Port Hopping) function"
 		fi
 	fi
 
@@ -484,21 +483,21 @@ function setHysteriaConfig(){
     if [ -z "${delay}" ];then
 		delay=200
     fi
-	echo -e "\n->延迟:`echoColor red ${delay}`ms\n"
-    echo -e "\n期望速度,这是客户端的峰值速度,服务端默认不受限。"`echoColor red Tips:脚本会自动*1.10做冗余，您期望过低或者过高会影响转发效率,请如实填写!`
-    echoColor green "请输入客户端期望的下行速度:(默认50,单位:mbps):"
+	echo -e "\n->Delay:`echoColor red ${delay}`ms\n"
+    echo -e "\nExpected speed, this is the peak speed of the client, and the server is not limited by default." `echoColor red Tips: The script will automatically *1.10 for redundancy, if your expectation is too low or too high, it will affect the forwarding efficiency, Please fill in truthfully!`
+     echoColor green "Please enter the downlink speed expected by the client: (default 50, unit: mbps):"
     read  download
     if [ -z "${download}" ];then
         download=50
     fi
-	echo -e "\n->客户端下行速度："`echoColor red ${download}`"mbps\n"
-    echo -e "\033[32m请输入客户端期望的上行速度(默认10,单位:mbps):\033[0m" 
+	echo -e "\n->client download speed: "`echoColor red ${download}`"mbps\n"
+    echo -e "\033[32m Please enter the expected uplink speed of the client (default 10, unit: mbps):\033[0m"
     read  upload
     if [ -z "${upload}" ];then
         upload=10
     fi
-	echo -e "\n->客户端上行速度："`echoColor red ${upload}`"mbps\n"
-	echoColor green "请输入认证口令(默认随机生成,建议20位以上强密码):"
+	echo -e "\n->client uplink speed: "`echoColor red ${upload}`"mbps\n"
+echoColor green "Please enter the authentication password (randomly generated by default, a strong password of more than 20 characters is recommended):"
 	read auth_secret
 	if [ -z "${auth_secret}" ];then
 		auth_secret=`tr -cd '0-9A-Za-z' < /dev/urandom | fold -w50 | head -n1`
@@ -506,8 +505,8 @@ function setHysteriaConfig(){
 	echo -e "\n->认证口令:"`echoColor red ${auth_secret}`"\n"
 	auth_str=""
 	obfs_str=""
-	echo -e "Tips: 如果使用obfs混淆加密,抗封锁能力更强,能被识别为未知udp流量,但是会增加cpu负载导致峰值速度下降,如果您追求性能且未被针对封锁建议不使用"
-	echo -e "\033[32m选择验证方式:\n\n\033[0m\033[33m\033[01m1、auth_str(默认)\n2、obfs\033[0m\033[32m\n\n输入序号:\033[0m"
+	echo -e "Tips: If obfs obfuscated encryption is used, the anti-blocking ability is stronger, and it can be recognized as unknown udp traffic, but it will increase the CPU load and cause the peak speed to drop. If you are pursuing performance and are not targeted for blocking, it is recommended not to use it"
+	echo -e "\033[32m select authentication method:\n\n\033[0m\033[33m\033[01m1, auth_str (default)\n2, obfs\033[0m\033[32m\n\nInput Serial number:\033[0m"
 	read auth_num
 	if [ -z "${auth_num}" ] || [ ${auth_num} == "1" ];then
 		auth_type="auth_str"
@@ -530,11 +529,11 @@ EOF
 EOF
 )
 	fi
-	echo -e "\n->您选择的验证方式为:"`echoColor red ${auth_type}`"\n"
-	echoColor green "请输入客户端名称备注(默认使用域名/IP区分,例如输入test,则名称为Hys-test):"
+	echo -e "\n->The authentication method you selected is: "`echoColor red ${auth_type}`"\n"
+	echoColor green "Please enter the client name for remarks (by default, the domain name/IP is used to distinguish, for example, if you enter test, the name is Hys-test):"
 	read remarks
-    echoColor green "\n配置录入完成!\n"
-    echoColor yellowBlack "执行配置..."
+    echoColor green "\nConfiguration entry complete!\n"
+    echoColor yellowBlack "Execute configuration..."
     download=$(($download + $download / 10))
     upload=$(($upload + $upload / 10))
     r_client=$(($delay * 2 * $download / 1000 * 1024 * 1024))
@@ -741,7 +740,7 @@ EOF
 	msg=`cat /tmp/hihy_debug.info`
 	case ${msg} in 
 		*"Failed to get a certificate with ACME"*)
-			echoColor red "域名:${u_host},申请证书失败!请查看服务器提供的面板防火墙是否开启(TCP:80,443)\n域名是否正确解析到此ip(不要开CDN!)\n如果无法满足以上两点,请重新安装使用自签证书."
+			echoColor red "Domain name: ${u_host}, failed to apply for a certificate! Please check whether the panel firewall provided by the server is enabled (TCP: 80,443)\nWhether the domain name is correctly resolved to this ip (do not open CDN!)\nIf the above two conditions cannot be met point, please reinstall using a self-signed certificate."
 			rm /etc/hihy/conf/hihyServer.json
 			rm /etc/hihy/result/hihyClient.json
 			delHihyFirewallPort
@@ -758,7 +757,7 @@ EOF
 			if echo ${portHoppingStatus} | grep -q "true";then
 				delHihyFirewallPort ${portHoppingStart} ${portHoppingEnd} ${port}
 			fi
-			echoColor red "端口被占用,请更换端口!"
+			echoColor red "The port is occupied, please change the port!"
 			rm /tmp/hihy_debug.info
 			exit
 			;;
@@ -789,7 +788,7 @@ EOF
 			if echo ${portHoppingStatus} | grep -q "true";then
 				delHihyFirewallPort ${portHoppingStart} ${portHoppingEnd} ${port}
 			fi
-			echoColor red "未知错误: 请查看下方错误信息,并提交issue到github"
+			echoColor red "Unknown error: Please check the error message below and submit an issue to github"
 			cat /tmp/hihy_debug.info
 			rm /tmp/hihy_debug.info
 			exit
@@ -814,12 +813,12 @@ EOF
 		url="hysteria://${u_host}:${port}?protocol=${protocol}&auth=${auth_str}&obfsParam=${obfs_str}&peer=${u_domain}&insecure=${sec}&upmbps=${upload}&downmbps=${download}&alpn=h3#Hys-${remarks}"
 	fi
 	echo ${url} > /etc/hihy/result/url.txt
-	echoColor greenWhite "安装成功,请查看下方配置详细信息"
+	echoColor greenWhite "The installation is successful, please check the configuration details below"
 }
 
 function downloadHysteriaCore(){
 	version=`curl --head -s https://github.com/apernet/hysteria/releases/latest | grep -i location | grep -o 'tag/[^[:space:]]*' | sed 's/tag\///;s/ //g'`
-	#兼容v2发布后的v1版本更新（暂时性的，下个版本移除）
+	#Compatible with the v1 version update after the release of v2 (temporary, the next version will be removed)
 	version="v1.3.5"
 	echo -e "The Latest hysteria version:"`echoColor red "${version}"`"\nDownload..."
 	if [ -z ${version} ];then
@@ -853,7 +852,7 @@ function updateHysteriaCore(){
 	if [ -f "/etc/hihy/bin/appS" ]; then
 		localV=`/etc/hihy/bin/appS -v | cut -d " " -f 3`
 		remoteV=`curl --head -s https://github.com/apernet/hysteria/releases/latest | grep -i location | grep -o 'tag/[^[:space:]]*' | sed 's/tag\///;s/ //g'`
-		#兼容v2发布后的v1版本更新（暂时性的，下个版本移除）
+		#Compatible with the v1 version update after the release of v2 (temporary, the next version will be removed)
 		remoteV="v1.3.5"
 		if [ -z $remoteV ];then
 			echoColor red "Network Error: Can't connect to Github!"
@@ -884,7 +883,7 @@ function updateHysteriaCore(){
 
 function changeServerConfig(){
 	if [ ! -f "/etc/systemd/system/hihy.service" ]; then
-		echoColor red "请先安装hysteria,再去修改配置..."
+		echoColor red "Please install hysteria first, and then modify the configuration..."
 		exit
 	fi
 	echoColor red "Stop hihy service..."
@@ -913,7 +912,7 @@ function changeServerConfig(){
 	setHysteriaConfig
 	systemctl start hihy
 	printMsg
-	echoColor yellowBlack "重新配置完成."
+	echoColor yellowBlack "Reconfiguration complete."
 	
 }
 
@@ -942,7 +941,7 @@ function hihyNotify(){
 		echoColor red "Network Error: Can't connect to Github for checking hihy version!"
 	else
 		if [ "${localV}" != "${remoteV}" ];then
-			echoColor purple "[Update] hihy有更新,version:v${remoteV},建议更新并查看日志: https://github.com/emptysuns/Hi_Hysteria/commits/main"
+			echoColor purple "[Update] hihy has an update, version:v${remoteV}, it is recommended to update and check the log: https://github.com/emptysuns/Hi_Hysteria/commits/main"
 		fi
 	fi
 	
@@ -953,7 +952,7 @@ function hyCoreNotify(){
 	if [ -f "/etc/hihy/bin/appS" ]; then
   		localV=`/etc/hihy/bin/appS -v | cut -d " " -f 3`
 		remoteV=`curl --head -s https://github.com/apernet/hysteria/releases/latest | grep -i location | grep -o 'tag/[^[:space:]]*' | sed 's/tag\///;s/ //g'`
-		#兼容v2发布后的v1版本更新（暂时性的，下个版本移除）
+		#Compatible with the v1 version update after the release of v2 (temporary, the next version will be removed)
 		remoteV="v1.3.5"
 		if [ -z $remoteV ];then
 			echoColor red "Network Error: Can't connect to Github for checking the hysteria version!"
@@ -985,7 +984,7 @@ function install()
 	mkdir -p /etc/hihy/bin /etc/hihy/conf /etc/hihy/cert  /etc/hihy/result
     echoColor purple "Ready to install.\n"
     version=`curl --head -s https://github.com/apernet/hysteria/releases/latest | grep -i location | grep -o 'tag/[^[:space:]]*' | sed 's/tag\///;s/ //g'`
-    #兼容v2发布后的v1版本更新（暂时性的，下个版本移除）
+   #Compatible with the v1 version update after the release of v2 (temporary, the next version will be removed)
 	version="v1.3.5"
 	checkSystemForUpdate
 	downloadHysteriaCore
@@ -1039,7 +1038,7 @@ function checkFirewalldAllowPort() {
 }
 
 function allowPort() {
-	# 如果防火墙启动状态则添加相应的开放端口
+	# If the firewall is enabled, add the corresponding open port
 	# $1 tcp/udp
 	# $2 port
 	if systemctl status netfilter-persistent 2>/dev/null | grep -q "active (exited)"; then
@@ -1091,7 +1090,7 @@ function addPortHoppingNat() {
 	# $1 portHoppingStart
 	# $2 portHoppingEnd
 	# $3 portHoppingTarget
-	# 如果防火墙启动状态则删除之前的规则
+	# If the firewall is enabled, delete the previous rule
 	if [[ -n $(find /etc -name "redhat-release") ]] || grep </proc/version -q -i "centos"; then
 		mkdir -p /etc/yum.repos.d
 
@@ -1124,7 +1123,7 @@ function addPortHoppingNat() {
 	fi
 
 	if [[ -z ${release} ]]; then
-		echoColor red "\n本脚本不支持此系统,请将下方日志反馈给开发者\n"
+		echoColor red "\nThis script does not support this system, please feedback the log below to the developer\n"
 		echoColor yellow "$(cat /etc/issue)"
 		echoColor yellow "$(cat /proc/version)"
 		exit 0
@@ -1146,7 +1145,7 @@ function addPortHoppingNat() {
 			${installType} "iptables-persistent"
 		fi
 		if ! [ -x "$(command -v netfilter-persistent)" ]; then
-			echoColor red "[Warnning]:netfilter-persistent安装失败,但安装进度不会停止,只是您的PortHopping转发规则为临时规则,重启可能失效,是否继续使用临时规则?(y/N)"
+			echoColor red "[Warnning]: The installation of netfilter-persistent failed, but the installation progress will not stop, but your PortHopping forwarding rule is a temporary rule, and restarting may fail. Do you want to continue to use the temporary rule? (y/N)"
 			read continueInstall
 			if [[ "${continueInstall}" != "y" ]]; then
 				exit 0
@@ -1159,7 +1158,7 @@ function addPortHoppingNat() {
 		if systemctl status netfilter-persistent 2>/dev/null | grep -q "active (exited)"; then
 			netfilter-persistent save 2> /dev/null
 		else 
-			echoColor red "netfilter-persistent未启动,PortHopping转发规则无法持久化,重启系统失效,请手动执行netfilter-persistent save,继续执行脚本不影响后续配置..."
+			echoColor red "netfilter-persistent is not started, PortHopping forwarding rules cannot be persisted, restarting the system fails, please manually execute netfilter-persistent save, continue to execute the script without affecting subsequent configuration..."
 		fi
 
 	fi
@@ -1167,7 +1166,7 @@ function addPortHoppingNat() {
 }
 
 function delHihyFirewallPort() {
-	# 如果防火墙启动状态则删除之前的规则
+	# If the firewall is enabled, delete the previous rule
 	port=`cat /etc/hihy/conf/hihyServer.json | grep "listen" | awk '{print $2}' | tr -cd "[0-9]"`
 	if [[ `ufw status 2>/dev/null | grep "Status: " | awk '{print $2}'` = "active" ]]	; then
 		if ufw status | grep -q ${port}; then
@@ -1230,7 +1229,7 @@ function editProtocol(){
 
 function changeMode(){
 	if [ ! -f "/etc/hihy/conf/hihyServer.json" ]; then
-		echoColor red "配置文件不存在,exit..."
+		echoColor red "The configuration file does not exist, exit..."
 		exit
 	fi
 	protocol=`cat /etc/hihy/conf/hihyServer.json  | grep protocol | awk '{print $2}' | awk -F '"' '{ print $2}'`
@@ -1238,39 +1237,39 @@ function changeMode(){
 	echoColor purple "${protocol}"
 	port=`cat /etc/hihy/conf/hihyServer.json | grep "listen" | awk '{print $2}' | tr -cd "[0-9]"`
 	if [ "${protocol}" = "udp" ];then
-		echo -e "\033[32m\n请选择修改的协议类型:\n\n\033[0m\033[33m\033[01m1、faketcp\n2、wechat-video\033[0m\033[32m\n\n输入序号:\033[0m"
+		echo -e "\033[32m\nPlease select the modified protocol type:\n\n\033[0m\033[33m\033[01m1, faketcp\n2, wechat-video\033[0m\033[32m\ n\nEnter serial number:\033[0m"
     	read pNum
 		if [ -z "${pNum}" ] || [ "${pNum}" == "1" ];then
-			echoColor purple "选择修改协议类型为faketcp."
+			echoColor purple "Choose to change the protocol type to faketcp."
 			editProtocol "udp" "faketcp"
 			delHihyFirewallPort
 			allowPort "tcp" ${port}
 		else
-			echoColor purple "选择修改协议类型为wechat-video."
+			echoColor purple "Choose to modify the protocol type to wechat-video."
 			editProtocol "udp" "wechat-video"
 		fi
 	elif [ "${protocol}" = "faketcp" ];then
 		delHihyFirewallPort
 		allowPort "udp" ${port}
-		echo -e "\033[32m\n请选择修改的协议类型:\n\n\033[0m\033[33m\033[01m1、udp\n2、wechat-video\033[0m\033[32m\n\n输入序号:\033[0m"
+		echo -e "\033[32m\nPlease select the modified protocol type:\n\n\033[0m\033[33m\033[01m1, udp\n2, wechat-video\033[0m\033[32m\ n\nEnter serial number:\033[0m"
     	read pNum
 		if [ -z "${pNum}" ] || [ "${pNum}" == "1" ];then
-			echoColor purple "选择修改协议类型为udp."
+			echoColor purple "Choose to modify the protocol type to udp."
 			editProtocol "faketcp" "udp"
 		else
 			echoColor purple "选择修改协议类型为wechat-video."
 			editProtocol "faketcp" "wechat-video"
 		fi
 	elif [ "${protocol}" = "wechat-video" ];then
-		echo -e "\033[32m\n请选择修改的协议类型:\n\n\033[0m\033[33m\033[01m1、udp\n2、faketcp\033[0m\033[32m\n\n输入序号:\033[0m"
+		echo -e "\033[32m\nPlease select the modified protocol type:\n\n\033[0m\033[33m\033[01m1, udp\n2, faketcp\033[0m\033[32m\n\ nEnter serial number:\033[0m"
     	read pNum
 		if [ -z "${pNum}" ] || [[ "${pNum}" == "1" ]];then
-			echoColor purple "选择修改协议类型为udp."
+			echoColor purple "Choose to modify the protocol type to udp."
 			editProtocol wechat-video udp
 		else
 			delHihyFirewallPort
 			allowPort "tcp" ${port}
-			echoColor purple "选择修改协议类型为faketcp."
+			echoColor purple "Choose to change the protocol type to faketcp."
 			editProtocol "wechat-video" "faketcp"
 		fi
 	else
@@ -1278,7 +1277,7 @@ function changeMode(){
 		exit
 	fi
 	systemctl restart hihy
-	echoColor green "修改成功"
+	echoColor green "modified successfully"
 }
 
 
@@ -1472,7 +1471,7 @@ EOF
 }
 
 function checkLogs(){
-	echoColor purple "hysteria 实时日志,等级:info,按Ctrl+C退出:"
+	echoColor purple "hysteria real-time log, level: info, press Ctrl+C to exit:"
 	journalctl -u hihy --output cat -f
 }
 
@@ -1487,17 +1486,17 @@ function start(){
 	sleep 5
 	status=`systemctl is-active hihy`
 	if [ "${status}" = "active" ];then
-		echoColor green "启动成功"
+		echoColor green "Start successfully"
 	else
 		echoColor red "启动失败"
-		echo -e "未知错误:请手动运行:\033[32m/etc/hihy/bin/appS -c /etc/hihy/conf/hihyServer.json server\033[0m"
-		echoColor red "查看错误日志,反馈到issue!"
+		echo -e "Unknown error: please run manually:\033[32m/etc/hihy/bin/appS -c /etc/hihy/conf/hihyServer.json server\033[0m"
+		echoColor red "Check error log, feedback to issue!"
 	fi
 }
 
 function stop(){
 	systemctl stop hihy
-	echoColor green "暂停成功"
+	echoColor green "paused successfully"
 }
 
 function restart(){
@@ -1506,11 +1505,11 @@ function restart(){
 	sleep 5
 	status=`systemctl is-active hihy`
 	if [ "${status}" = "active" ];then
-		echoColor green "重启成功"
+		echoColor green "restart successful"
 	else
-		echoColor red "重启失败"
-		echo -e "未知错误:请手动运行:\033[32m/etc/hihy/bin/appS -c /etc/hihy/conf/hihyServer.json server\033[0m"
-		echoColor red "查看错误日志,反馈到issue!"
+		echoColor red "Restart failed"
+		echo -e "Unknown error: please run manually:\033[32m/etc/hihy/bin/appS -c /etc/hihy/conf/hihyServer.json server\033[0m"
+		echoColor red "Check error log, feedback to issue!"
 	fi
 }
 
@@ -1519,39 +1518,39 @@ function menu()
 hihy
 clear
 cat << EOF
- -------------------------------------------
-|**********      Hi Hysteria       **********|
-|**********    Author: emptysuns   **********|
-|**********     Version: `echoColor red "${hihyV}"`    **********|
- -------------------------------------------
-Tips:`echoColor green "hihy"`命令再次运行本脚本.
-`echoColor skyBlue "............................................."`
-`echoColor purple "###############################"`
+-----------------------------------------------
+|********** Hi Hysteria ***********|
+|********** Author: emptysuns ***********|
+|********** Version: `echoColor red "${hihyV}"` ***********|
+  -----------------------------------------------
+Tips: The `echoColor green "hihy"` command runs the script again.
+`echoColor skyBlue "................................................" `
+`echoColor purple "#################################"`
 
-`echoColor skyBlue "....................."`
-`echoColor yellow "1)  安装 hysteria"`
-`echoColor magenta "2)  卸载"`
-`echoColor skyBlue "....................."`
-`echoColor yellow "3)  启动"`
-`echoColor magenta "4)  暂停"`
-`echoColor yellow "5)  重新启动"`
-`echoColor yellow "6)  运行状态"`
-`echoColor skyBlue "....................."`
-`echoColor yellow "7)  更新Core"`
-`echoColor yellow "8)  查看当前配置"`
-`echoColor skyBlue "9)  重新配置"`
-`echoColor yellow "10) 切换ipv4/ipv6优先级"`
-`echoColor yellow "11) 更新hihy"`
-`echoColor red "12) 完全重置所有配置"`
-`echoColor skyBlue "13) 修改当前协议类型"`
-`echoColor yellow "14) 查看实时日志"`
+`echoColor skyBlue "................................"`
+`echoColor yellow "1) install hysteria"`
+`echoColor magenta "2) Uninstall"`
+`echoColor skyBlue "................................"`
+`echoColor yellow "3) start"`
+`echoColor magenta "4) pause"`
+`echoColor yellow "5) restart"`
+`echoColor yellow "6) Running status"`
+`echoColor skyBlue "................................"`
+`echoColor yellow "7) Update Core"`
+`echoColor yellow "8) View current configuration"`
+`echoColor skyBlue "9) Reconfigure"`
+`echoColor yellow "10) switch ipv4/ipv6 priority"`
+`echoColor yellow "11) update hihy"`
+`echoColor red "12) Complete reset of all configurations"`
+`echoColor skyBlue "13) Modify the current protocol type"`
+`echoColor yellow "14) View real-time logs"`
 
-`echoColor purple "###############################"`
+`echoColor purple "#################################"`
 `hihyNotify`
 `hyCoreNotify`
 
-`echoColor magenta "0)退出"`
-`echoColor skyBlue "............................................."`
+`echoColor magenta "0) exit"`
+`echoColor skyBlue "................................................" `
 EOF
 read -p "请选择:" input
 case $input in
@@ -1610,49 +1609,49 @@ case $input in
 
 checkRoot
 if [ "$1" == "install" ] || [ "$1" == "1" ]; then
-	echoColor purple "-> 1) 安装 hysteria"
-	install
+echoColor purple "-> 1) install hysteria"
+install
 elif [ "$1" == "uninstall" ] || [ "$1" == "2" ]; then
-	echoColor purple "-> 2) 卸载 hysteria"
-	uninstall
-elif [ "$1" == "start" ]  || [ "$1" == "3"  ]; then
-	echoColor purple "-> 3) 启动 hysteria"
-	start
-elif [ "$1" == "stop" ]  || [ "$1" == "4" ]; then
-	echoColor purple "-> 4) 暂停 hysteria"
-	stop
-elif [ "$1" == "restart" ]  || [ "$1" == "5" ]; then
-	echoColor purple "-> 5) 重新启动 hysteria"
-	restart
-elif [ "$1" == "checkStatus" ]  || [ "$1" == "6" ]; then
-	echoColor purple "-> 6) 运行状态"
-	checkStatus
-elif [ "$1" == "updateHysteriaCore" ]  || [ "$1" == "7" ]; then
-	echoColor purple "-> 7) 更新Core"
-	updateHysteriaCore
-elif [ "$1" == "printMsg" ]  || [ "$1" == "8" ]; then
-	echoColor purple "-> 8) 查看当前配置"
-	printMsg
-elif [ "$1" == "changeServerConfig" ]  || [ "$1" == "9" ]; then
-	echoColor purple "-> 9) 重新配置"
-	changeServerConfig
-elif [ "$1" == "changeIp64" ]  || [ "$1" == "10" ]; then
-	echoColor purple "-> 10) 切换ipv4/ipv6优先级"
-	changeIp64
-elif [ "$1" == "hihyUpdate" ]  || [ "$1" == "11" ]; then
-	echoColor purple "-> 11) 更新hihy"
-	hihyUpdate
-elif [ "$1" == "reinstall" ]  || [ "$1" == "12" ]; then
-	echoColor purple "-> 12) 完全重置所有配置"
-	reinstall
-elif [ "$1" == "changeMode" ]  || [ "$1" == "13" ]; then
-	echoColor purple "-> 13) 修改当前协议类型"
-	changeMode
-elif [ "$1" == "checkLogs" ]  || [ "$1" == "14" ]; then
-	echoColor purple "-> 14) 查看实时日志"
-	checkLogs
+echoColor purple "-> 2) Uninstall hysteria"
+uninstall
+elif [ "$1" == "start" ] || [ "$1" == "3" ]; then
+echoColor purple "-> 3) start hysteria"
+start
+elif [ "$1" == "stop" ] || [ "$1" == "4" ]; then
+echoColor purple "-> 4) suspend hysteria"
+stop
+elif [ "$1" == "restart" ] || [ "$1" == "5" ]; then
+echoColor purple "-> 5) restart hysteria"
+restart
+elif [ "$1" == "checkStatus" ] || [ "$1" == "6" ]; then
+echoColor purple "-> 6) Running status"
+checkStatus
+elif [ "$1" == "updateHysteriaCore" ] || [ "$1" == "7" ]; then
+echoColor purple "-> 7) Update Core"
+updateHysteriaCore
+elif [ "$1" == "printMsg" ] || [ "$1" == "8" ]; then
+echoColor purple "-> 8) View the current configuration"
+printMsg
+elif [ "$1" == "changeServerConfig" ] || [ "$1" == "9" ]; then
+echoColor purple "-> 9) Reconfiguration"
+changeServerConfig
+elif [ "$1" == "changeIp64" ] || [ "$1" == "10" ]; then
+echoColor purple "-> 10) switch ipv4/ipv6 priority"
+changeIp64
+elif [ "$1" == "hihyUpdate" ] || [ "$1" == "11" ]; then
+echoColor purple "-> 11) update hihy"
+hihyUpdate
+elif [ "$1" == "reinstall" ] || [ "$1" == "12" ]; then
+echoColor purple "-> 12) Completely reset all configurations"
+reinstall
+elif [ "$1" == "changeMode" ] || [ "$1" == "13" ]; then
+echoColor purple "-> 13) Modify the current protocol type"
+changeMode
+elif [ "$1" == "checkLogs" ] || [ "$1" == "14" ]; then
+echoColor purple "-> 14) View real-time logs"
+checkLogs
 elif [ "$1" == "cronTask" ]; then
-	cronTask
+cronTask
 else
-	menu
-fi
+menu
+  fi
