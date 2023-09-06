@@ -1,19 +1,19 @@
-#### [端口跳跃/多端口](Port Hopping)介绍
+#### Introduction to [Port Hopping/Multiple Ports] (Port Hopping)
 
-**BETA测试中，如果有问题请发issue询问**
+**During BETA testing, if you have any questions, please send an issue to ask**
 
-hysteria在1.3.0版本引入了Port Hopping功能，意在改善**种花恭贺国**用户反馈长时间单端口 UDP 连接容易被运营商封锁/QoS 的问题。
+Hysteria introduced the Port Hopping function in version 1.3.0, which is intended to improve the user feedback of **planting flowers and congratulations** on the problem that long-term single-port UDP connections are easily blocked by operators/QoS.
 
-经测试效果**非常明显，但**是**仅仅UDP协议支持**，其他协议**不支持**开启
+After testing, the effect is **very obvious, but ** is ** only supported by UDP protocol, other protocols ** do not support ** open
 
-鉴于此次改动幅度对配置影响较大，**很多诸如nekoray/clash_meta/passwall的客户端都没有很好的支持这一功能**，目前仅使用V2rayN这种
+In view of the large impact of this change on the configuration, **Many clients such as nekoray/clash_meta/passwall do not support this function very well**, currently only use V2rayN
 
-**直接使用hysteria core运行的方式**得到了支持，但是需要升级双端（服务端、客户端）
+**The way to run directly using hysteria core** is supported, but both ends (server and client) need to be upgraded
 
-**目前无法通过一键链接导入**
+**Currently unable to import via one-click link**
 
-而且此监听多端口功能，并非服务端hysteria直接监听端口，而是通过iptables NAT的方式，将某些端口转发到监听端口上。
+And this multi-port monitoring function is not that the server hysteria directly monitors the port, but forwards some ports to the listening port through iptables NAT.
 
-您可以从如上信息看出，这个功能目前很**新**，各种地方都没有很好的适配，hihy目前对这个功能的适配处于摸索阶段，如果有什么好的建议请在issue提出
+You can see from the above information that this function is currently very **new**, and there is no good adaptation in various places. Hihy is currently in the groping stage for the adaptation of this function. If you have any good suggestions, please post in issue propose
 
-参考https://hysteria.network/docs/port-hopping/
+Refer to https://hysteria.network/docs/port-hopping/
