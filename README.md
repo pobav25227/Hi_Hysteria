@@ -71,9 +71,13 @@ Adapt to ubuntu/debian, centos/rhel operating system, misple/arm/x86/s390x archi
 
 ### pull install
 
-```
+``` bash
+#install git
+apt install git
 su - root #switch to root user.
-bash <(curl -fsSL https://git.io/hysteria.sh)
+git clone https://github.com/pobav25227/Hi_Hysteria.git
+cd Hi_Hysteria
+cd server
 ```
 
 ### Configuration process
