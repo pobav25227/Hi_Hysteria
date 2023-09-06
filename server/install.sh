@@ -2,40 +2,40 @@
 hihyV="0.4.9"
 function echoColor() {
 	case $1 in
-		# 红色
+		# red
 	"red")
 		echo -e "\033[31m${printN}$2 \033[0m"
 		;;
-		# 天蓝色
+		# sky blue
 	"skyBlue")
 		echo -e "\033[1;36m${printN}$2 \033[0m"
 		;;
-		# 绿色
+		# green
 	"green")
 		echo -e "\033[32m${printN}$2 \033[0m"
 		;;
-		# 白色
+		# White
 	"white")
 		echo -e "\033[37m${printN}$2 \033[0m"
 		;;
 	"magenta")
 		echo -e "\033[31m${printN}$2 \033[0m"
 		;;
-		# 黄色
+		# yellow
 	"yellow")
 		echo -e "\033[33m${printN}$2 \033[0m"
 		;;
-        # 紫色
+        # Purple
     "purple")
         echo -e "\033[1;;35m${printN}$2 \033[0m"
         ;;
         #
     "yellowBlack")
-        # 黑底黄字
+        # Yellow lettering on black background
         echo -e "\033[1;33;40m${printN}$2 \033[0m"
         ;;
 	"greenWhite")
-		# 绿底白字
+		# white text on green background
 		echo -e "\033[42;37m${printN}$2 \033[0m"
 		;;
 	esac
