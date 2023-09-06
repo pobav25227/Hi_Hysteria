@@ -24,7 +24,7 @@ The most difficult thing in the magic chant is not the construction and maintena
 
 1. Bench provided by the original project:
 
-![image](/docs/bench/bench.png)
+![link]([https://](https://hysteria.network/))
 
 2. 50mbps Northern Telecom, Beijing exit, directly connected to line 163 in the vir San Jose computer room, and tested YT 1080p60 live stream at 22-23 o'clock:
 
