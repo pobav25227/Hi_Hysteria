@@ -78,6 +78,8 @@ su - root #switch to root user.
 git clone https://github.com/pobav25227/Hi_Hysteria.git
 cd Hi_Hysteria
 cd server
+chmod +x install.sh
+./install.sh
 ```
 
 ### Configuration process
